@@ -154,5 +154,5 @@ INSERT INTO `usuario_perfiles` (`USERNAME`,`ID_PERFIL`) VALUES ('cliente',2);
 
 
 -- creacion de usuarios para aislarlo del root
-create user uzaps identified by 'uzaps';
+create user uzaps identified by 'uzaps123';
 grant all privileges on zaps_2024.* to uzaps;
