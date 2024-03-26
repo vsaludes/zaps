@@ -11,7 +11,7 @@ CREATE TABLE Usuarios (
     direccion VARCHAR(255),
     telefono VARCHAR(15),
     verificado BOOLEAN,
-    enabled INT NOT NULL DEFAULT 1,
+    enabled BOOLEAN NOT NULL DEFAULT 1,
     -- activado 1 desactivado 2
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ultima_conexion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -29,21 +29,16 @@ CREATE TABLE Productos (
     nombre VARCHAR(80) not null,
     descripcion VARCHAR(700),
     precio DECIMAL(10,2),
-    talla INT,
+    talla DECIMAL(3,1),
     color VARCHAR(20),
-    tipo_pisada VARCHAR(20),
-    -- Pronador, Supinador, Neutro
-    tipo_superficie VARCHAR(20),
-    -- Running, Trail, Pista
-    tipo_distancia VARCHAR(20),
-    -- Corta, Media Maratón, Maratón, Ultra	
+    tipo_pisada ENUM('pronador', 'supinador', 'neutro'),
+    tipo_superficie ENUM('running', 'trail', 'pista'),
+    tipo_distancia ENUM('corta', 'media maraton', 'maraton', 'ultra'),	
     tipo_drop INT,
     -- en mm
-    genero VARCHAR(10),
-    -- mujer, hombre, unisex, junior 
+    genero ENUM('mujer', 'hombre', 'unisex', 'junior'), 
     marca VARCHAR(50),       
-    uso VARCHAR(20),
-    -- Entrenamiento, Competición, Mixta
+    uso ENUM('entrenamiento', 'competicion', 'mixta'),
     stock INT,
     imagen_url VARCHAR(255),
     disponible BOOLEAN,
@@ -81,7 +76,7 @@ CREATE TABLE Pedidos (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT not null,
     id_usuario INT,
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10,2),
+    total DECIMAL(8,2),
     estado_pedido ENUM('pendiente', 'enviado', 'entregado', 'cancelado'),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 );
@@ -127,7 +122,7 @@ CREATE TABLE Cupones_Descuento (
     descuento DECIMAL(5,2),
     fecha_inicio DATE,
     fecha_fin DATE,
-    estado ENUM('activo', 'inactivo'),
+    estado BOOLEAN DEFAULT 0,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -141,8 +136,8 @@ CREATE TABLE Perfiles (
 INSERT INTO `perfiles` (`ID_PERFIL`,`NOMBRE`) VALUES (1,'ROLE_ADMINISTRADOR');
 INSERT INTO `perfiles` (`ID_PERFIL`,`NOMBRE`) VALUES (2,'ROLE_CLIENTE');
 
-CREATE TABLE USUARIO_PERFILES (
-    USERNAME VARCHAR(45) NOT NULL,
+CREATE TABLE Usuario_Perfiles (
+    username VARCHAR(45) NOT NULL,
     id_perfil INT NOT NULL,
     PRIMARY KEY(username, id_perfil),
     FOREIGN KEY(username) REFERENCES Usuarios(username),
@@ -154,5 +149,5 @@ INSERT INTO `usuario_perfiles` (`USERNAME`,`ID_PERFIL`) VALUES ('cliente',2);
 
 
 -- creacion de usuarios para aislarlo del root
-create user uzaps identified by 'uzaps123';
+create user uzaps identified by 'uzaps';
 grant all privileges on zaps_2024.* to uzaps;
