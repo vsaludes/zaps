@@ -64,7 +64,7 @@ CREATE TABLE Carrito (
     id_usuario INT,
     id_producto INT,
     cantidad INT,
-    subtotal DECIMAL(10,2),
+    subtotal DECIMAL(8,2),
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
@@ -86,7 +86,7 @@ CREATE TABLE Detalles_Pedido (
     id_pedido INT,
     id_producto INT,
     cantidad INT,
-    subtotal DECIMAL(10,2),
+    subtotal DECIMAL(8,2),
     FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido),
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
@@ -118,10 +118,11 @@ CREATE TABLE Devoluciones (
 CREATE TABLE Cupones_Descuento (
     id_cupon INT PRIMARY KEY AUTO_INCREMENT not null,
     codigo VARCHAR(20) UNIQUE,
-    descuento DECIMAL(5,2),
+    descuento INT,
+    -- 5%, 10%, 15%, etc.
+    estado BOOLEAN DEFAULT FALSE,
     fecha_inicio DATE,
     fecha_fin DATE,
-    estado BOOLEAN DEFAULT FALSE,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

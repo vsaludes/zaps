@@ -1,7 +1,7 @@
 package com.edix.restful.zaps.modelo.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -14,9 +14,13 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -47,20 +51,18 @@ public class Usuario implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ultima_conexion")
 	private Date ultimaConexion;
-	
-///////////
-	
-	@OneToMany(mappedBy="idUsuario")
-    private List<Valoracion> valoraciones;
+		
+	@OneToMany(mappedBy="usuario")
+    private List<Valoracion> valoracion;
 
-    @OneToMany(mappedBy="idUsuario")
-    private List<Carrito> carritos;
+	@OneToOne(mappedBy="usuario")
+    private Carrito carrito;
 
-    @OneToMany(mappedBy="idUsuario")
-    private List<Pedido> pedidos;
+    @OneToMany(mappedBy="usuario")
+    private List<Pedido> pedido;
 
-    @OneToMany(mappedBy="idUsuario")
-    private List<ListaDeseos> listaDeseos;
+    @OneToMany(mappedBy="usuario")
+    private List<ListaDeseo> listaDeseo;
     
 	//uni-directional many-to-many association to Perfil
 	@ManyToMany

@@ -2,7 +2,8 @@ package com.edix.restful.zaps.modelo.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +12,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -77,6 +82,21 @@ public class Producto implements Serializable {
 	@Column(name="fecha_actualizacion")
 	private Date fechaActualizacion;
 	
+	@OneToMany(mappedBy="producto")
+	private List<Valoracion> valoracion;
+	
+	@ManyToMany(mappedBy = "producto")
+	private List<ListaDeseo> listaDeseo;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_carrito")
+	private Carrito carrito;
+	
+	@OneToMany(mappedBy = "producto")
+    private List<DetallePedido> detallePedido;
+    
+    @OneToMany(mappedBy = "producto")
+    private List<Devolucion> devolucion;
 	
 	public enum TipoPisada {
 	    PRONADOR,
