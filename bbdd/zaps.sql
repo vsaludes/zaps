@@ -11,17 +11,16 @@ CREATE TABLE Usuarios (
     direccion VARCHAR(255),
     telefono VARCHAR(15),
     verificado BOOLEAN,
-    enabled BOOLEAN NOT NULL DEFAULT 1,
-    -- activado 1 desactivado 2
+    enabled BOOLEAN NOT NULL DEFAULT TRUE,
+    -- activado TRUE desactivado FALSE
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ultima_conexion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO Usuarios (username, password, nombre, email, verificado, enabled, fecha_registro, ultima_conexion)
-VALUES ('admin', '{noop}admin123', 'Administrador', 'admin@example.com', true, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO Usuarios (username, password, nombre, email, verificado, enabled, fecha_registro, ultima_conexion)
-VALUES ('cliente', '{noop}cliente123', 'Cliente', 'cliente@example.com', true, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
+VALUES ('admin', '{noop}admin123', 'Administrador', 'admin@example.com', true, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO Usuarios (username, password, nombre, email, direccion, telefono, verificado, enabled, fecha_registro, ultima_conexion)
+VALUES ('cliente', '{noop}cliente123', 'Cliente', 'cliente@example.com', 'Calle Tolomeo 47, 12331 Sevilla', '654554562', true, true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Tabla de Productos
 CREATE TABLE Productos (
@@ -122,7 +121,7 @@ CREATE TABLE Cupones_Descuento (
     descuento DECIMAL(5,2),
     fecha_inicio DATE,
     fecha_fin DATE,
-    estado BOOLEAN DEFAULT 0,
+    estado BOOLEAN DEFAULT FALSE,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -137,17 +136,29 @@ INSERT INTO `perfiles` (`ID_PERFIL`,`NOMBRE`) VALUES (1,'ROLE_ADMINISTRADOR');
 INSERT INTO `perfiles` (`ID_PERFIL`,`NOMBRE`) VALUES (2,'ROLE_CLIENTE');
 
 CREATE TABLE Usuario_Perfiles (
-    username VARCHAR(45) NOT NULL,
+    id_usuario INT NOT NULL,
     id_perfil INT NOT NULL,
-    PRIMARY KEY(username, id_perfil),
-    FOREIGN KEY(username) REFERENCES Usuarios(username),
+    PRIMARY KEY(id_usuario, id_perfil),
+    FOREIGN KEY(id_usuario) REFERENCES Usuarios(id_usuario),
     FOREIGN KEY(id_perfil) REFERENCES Perfiles(id_perfil)
 );
 
-INSERT INTO `usuario_perfiles` (`USERNAME`,`ID_PERFIL`) VALUES ('admin',1);
-INSERT INTO `usuario_perfiles` (`USERNAME`,`ID_PERFIL`) VALUES ('cliente',2);
+INSERT INTO `usuario_perfiles` (`ID_USUARIO`,`ID_PERFIL`) VALUES ('1',1);
+INSERT INTO `usuario_perfiles` (`ID_USUARIO`,`ID_PERFIL`) VALUES ('2',2);
 
 
 -- creacion de usuarios para aislarlo del root
 create user uzaps identified by 'uzaps';
 grant all privileges on zaps_2024.* to uzaps;
+
+
+--------------------
+-- Querys Pruebas
+
+-- SELECT * FROM zaps_2024.usuarios;
+
+-- SELECT * FROM zaps_2024.usuario_perfiles;
+
+-- SELECT u.username, u.id_usuario, up.id_perfil
+-- FROM Usuario_Perfiles up
+-- JOIN Usuarios u ON up.id_usuario = u.id_usuario;
