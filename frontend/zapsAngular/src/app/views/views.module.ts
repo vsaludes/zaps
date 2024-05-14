@@ -6,6 +6,10 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CarouselComponent } from './pages/carousel/carousel.component';
+import { ProductoComponent } from './pages/producto/producto.component';
+import { CategoriaComponent } from './pages/categoria/categoria.component';
+
+
 
 
 @NgModule({
@@ -13,7 +17,9 @@ import { CarouselComponent } from './pages/carousel/carousel.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProductoComponent,
+    CategoriaComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,8 @@ import { Error404PageComponent } from './shared/pages/error404-page/error404-pag
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
+
 const routes: Routes = [
   {
     path: '',
@@ -24,6 +26,9 @@ const routes: Routes = [
     path: '**',
     redirectTo: '404'
   },
+
+
+
 ];
 
 @NgModule({

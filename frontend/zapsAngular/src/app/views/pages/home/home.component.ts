@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CategoriasService } from '../../../core/services/categorias.service';
+import { Categoria } from '../../../core/interfaces/categoria';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit{
 
+  categoriasService = inject(CategoriasService)
+  categorias:Categoria[] = [];
+
   ngOnInit(): void {
+    this.categoriasService.getAll().then(res => this.categorias = res)
 
   }
 

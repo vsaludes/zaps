@@ -1,0 +1,18 @@
+export interface Producto {
+  id: number,
+  nombre: string,
+  descripcion: string,
+  precio: number,
+  talla: number,
+  color: string,
+  pisada: string,
+  superficie: string,
+  distancia: string,
+  drop: string,
+  genero: string,
+  marca: string,
+  uso: string,
+  stock: number,
+  fotoUrl: string,
+  disponible: boolean,
+}
