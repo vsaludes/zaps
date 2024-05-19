@@ -69,7 +69,7 @@ public class Usuario implements Serializable {
 	@JoinTable(
 		name="Usuario_Perfiles"
 		, joinColumns={
-			@JoinColumn(name="username")
+			@JoinColumn(name="id_usuario")
 			}
 		, inverseJoinColumns={
 			@JoinColumn(name="id_perfil")
