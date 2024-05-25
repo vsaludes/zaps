@@ -1,0 +1,11 @@
+ALTER TABLE Productos MODIFY COLUMN tipo_distancia ENUM('corta', 'media_maraton', 'maraton', 'ultra');
+
+ALTER TABLE Productos ADD COLUMN cantidad INT DEFAULT 3;
+
+CREATE TABLE carrito_producto (
+    id_carrito INT NOT NULL,
+    id_producto INT NOT NULL,
+    PRIMARY KEY (id_carrito, id_producto),
+    FOREIGN KEY (id_carrito) REFERENCES Carrito(id_carrito),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);

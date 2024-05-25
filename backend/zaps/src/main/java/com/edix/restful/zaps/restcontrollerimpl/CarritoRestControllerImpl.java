@@ -6,7 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.edix.restful.zaps.modelo.dto.CarritoDTO;
+import com.edix.restful.zaps.modelo.dto.CrearCarritoDTO;
+import com.edix.restful.zaps.modelo.dto.ProductoDTO;
 import com.edix.restful.zaps.modelo.entities.Carrito;
+import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.restcontroller.CarritoController;
 import com.edix.restful.zaps.service.CarritoService;
 
@@ -50,8 +54,8 @@ public class CarritoRestControllerImpl implements CarritoController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> crearCarrito(@RequestBody Carrito carrito) {
-        boolean result = carritoService.crearCarrito(carrito);
+    public ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO) {
+    	boolean result = carritoService.crearCarrito(crearCarritoDTO.getIdUsuario());
         if (result) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
@@ -69,4 +73,18 @@ public class CarritoRestControllerImpl implements CarritoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-}
+    
+        @PostMapping("/{idCarrito}/productos")
+        public ResponseEntity<Void> agregarProductoAlCarrito(
+                @PathVariable int idCarrito,
+                ProductoDTO productoDTO) {
+
+            boolean result = carritoService.agregarProductoAlCarrito(idCarrito, productoDTO);
+            if (result) {
+                return ResponseEntity.status(HttpStatus.CREATED).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        }
+    }
+
