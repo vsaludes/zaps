@@ -10,8 +10,12 @@ const routes: Routes = [
     children: [
       { path: '**', redirectTo: 'home' },
     ]
+<<<<<<< HEAD
   }
 
+=======
+  },
+>>>>>>> main
 ];
 
 @NgModule({

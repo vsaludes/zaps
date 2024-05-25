@@ -13,21 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductoDTO {
 
-    private String nombre;
-    private String descripcion;
-    private BigDecimal precio;
-    private double talla;
-    private String color;
-    private Producto.TipoPisada tipoPisada;
-    private Producto.TipoSuperficie tipoSuperficie;
-    private Producto.TipoDistancia tipoDistancia;
-    private int tipoDrop;
-    private Producto.Genero genero;
-    private String marca;
-    private Producto.Uso uso;
-    private int año;
-    private int stock;
-    private String imagenUrl;
-    private boolean disponible;
-    
+	private int idProducto;
+    private int cantidad;
 }

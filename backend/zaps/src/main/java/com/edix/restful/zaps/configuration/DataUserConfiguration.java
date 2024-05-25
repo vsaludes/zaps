@@ -1,4 +1,4 @@
-package com.edix.restful.zaps.configuration;
+/*package com.edix.restful.zaps.configuration;
 
 import javax.sql.DataSource;
 
@@ -71,7 +71,7 @@ public class DataUserConfiguration{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	*/
+	/
 	
 
-}
+}*/

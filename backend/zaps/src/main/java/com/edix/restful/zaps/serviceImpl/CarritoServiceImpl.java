@@ -4,10 +4,16 @@ package com.edix.restful.zaps.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.edix.restful.zaps.modelo.dto.ProductoDTO;
 import com.edix.restful.zaps.modelo.entities.Carrito;
+import com.edix.restful.zaps.modelo.entities.Producto;
+import com.edix.restful.zaps.modelo.entities.Usuario;
 import com.edix.restful.zaps.repository.CarritoRepository;
+import com.edix.restful.zaps.repository.UsuarioRepository;
 import com.edix.restful.zaps.service.CarritoService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -15,6 +21,8 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Autowired
     private CarritoRepository carritoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public Carrito buscarCarritoPorId(int idCarrito) {
@@ -36,8 +44,23 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public boolean crearCarrito(Carrito carrito) {
-        carritoRepository.save(carrito);
+    public boolean crearCarrito(int idUsuario) {
+        // Verificar si ya existe un carrito para el usuario
+        Carrito carritoExistente = carritoRepository.findByUsuarioId(idUsuario);
+        if (carritoExistente != null) {
+            return false; // Ya existe un carrito para este usuario
+        }
+        
+        // Si no existe, crear un nuevo carrito
+        Carrito nuevoCarrito = new Carrito();
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+        if (usuario == null) {
+            return false; // El usuario no existe
+        }
+        nuevoCarrito.setUsuario(usuario);
+        
+        // Guardar el nuevo carrito en la base de datos
+        carritoRepository.save(nuevoCarrito);
         return true;
     }
 
@@ -48,5 +71,65 @@ public class CarritoServiceImpl implements CarritoService {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public boolean agregarProductoAlCarrito(int idCarrito, ProductoDTO productoDTO) {
+        Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
+        if (carrito != null) {
+            List<Producto> productos = carrito.getProductos();
+            for (Producto p : productos) {
+                if (p.getIdProducto() == productoDTO.getIdProducto()) {
+                    p.setCantidad(p.getCantidad() + productoDTO.getCantidad());
+                    
+                    actualizarSubtotal(carrito);
+                    carritoRepository.save(carrito);
+                    return true;
+                }
+            }
+            Producto nuevoProducto = new Producto();
+            nuevoProducto.setIdProducto(productoDTO.getIdProducto());
+            nuevoProducto.setCantidad(productoDTO.getCantidad());
+            productos.add(nuevoProducto);
+            actualizarSubtotal(carrito);
+            carritoRepository.save(carrito);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminarProductoDelCarrito(int idCarrito, Producto producto) {
+        Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
+        if (carrito != null) {
+            List<Producto> productos = carrito.getProductos();
+            for (int i = 0; i < productos.size(); i++) {
+                if (productos.get(i).getIdProducto() == producto.getIdProducto()) {
+                    productos.remove(i);
+                    actualizarSubtotal(carrito);
+                    carritoRepository.save(carrito);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public BigDecimal calcularTotalCarrito(int idCarrito) {
+        Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
+        if (carrito != null) {
+            return carrito.getSubtotal();
+        }
+        return BigDecimal.ZERO;
+    }
+
+    private void actualizarSubtotal(Carrito carrito) {
+        BigDecimal subtotal = BigDecimal.ZERO;
+        for (Producto p : carrito.getProductos()) {
+            BigDecimal cantidad = BigDecimal.valueOf(p.getCantidad());
+            subtotal = subtotal.add(p.getPrecio().multiply(cantidad));
+        }
+        carrito.setSubtotal(subtotal);
     }
 }

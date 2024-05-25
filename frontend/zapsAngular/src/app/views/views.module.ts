@@ -24,6 +24,10 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
   imports: [
     CommonModule,
     ViewsRoutingModule
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class ViewsModule { }
