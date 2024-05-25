@@ -1,39 +1,42 @@
 <header class="bg-white shadow-md w-screen">
   <div class="container nav_header mx-auto py-4 px-4">
-      <div class="flex justify-between  items-center">
-
-          <div class="">
-              <ul class="flex space-x-4">
-                  <li><a href="#" class="text-gray-600 hover:text-gray-800">Productos</a></li>
-                  <li><a href="#" class="text-gray-600 hover:text-gray-800">Comparador</a></li>
-              </ul>
-          </div>
-
-          <div class="">
-            <img
-            class="w-[100px] mx-[0px]"
-            src="/assets/images/logo.png">
-          </div>
-
-          <div class="">
-            <ul class="flex space-x-4">
-              <li><img
-                title="Cart"
-                routerLink="/cart"
-                class="mx-[15px] w-6 h-auto"
-                src="/assets/images/cart.svg"
-              /></li>
-              <li><img
-                title="User"
-                routerLink="/user"
-                class="mx-[15px] w-6 h-auto"
-                src="/assets/images/user.svg"
-              /></li>
-          </ul>
-          </div>
-
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <ul class="flex space-x-4">
+          <li><a href="#" class="text-gray-600 hover:text-gray-800">Productos</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-gray-800">Comparador</a></li>
+        </ul>
       </div>
+
+      <div class="flex-grow flex justify-center">
+        <a routerLink="/home">
+          <img class="w-[100px]" src="/assets/images/logo.png" alt="Logo">
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <ul class="flex space-x-4">
+          <li><img
+            title="Cart"
+            routerLink="/cart"
+            class="w-6 h-auto"
+            src="/assets/images/cart.svg"
+          /></li>
+          <li class="ml-6"><img
+            title="User"
+            routerLink="/user"
+            class="w-6 h-auto"
+            src="/assets/images/user.svg"
+          /></li>
+        </ul>
+      </div>
+
+      <div class="flex items-center space-x-4 ml-4">
+        <ul class="flex space-x-4">
+          <li *ngIf="!userLoginOn"><a routerLink="/auth/login" class="text-gray-600 hover:text-gray-800">Iniciar Sesión</a></li>
+          <li *ngIf="userLoginOn"><a routerLink="/home" class="text-gray-600 hover:text-gray-800">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
-
-

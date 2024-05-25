@@ -18,6 +18,10 @@ import { CarouselComponent } from './pages/carousel/carousel.component';
   imports: [
     CommonModule,
     ViewsRoutingModule
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class ViewsModule { }
