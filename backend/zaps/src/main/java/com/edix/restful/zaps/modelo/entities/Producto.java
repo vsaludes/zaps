@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -76,6 +79,8 @@ public class Producto implements Serializable {
 	
 	private boolean disponible;
 	
+	private int cantidad;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_creacion")
 	private Date fechaCreacion;
@@ -87,17 +92,27 @@ public class Producto implements Serializable {
 	@OneToMany(mappedBy="producto")
 	private List<Valoracion> valoracion;
 	
-	//@ManyToMany(mappedBy = "producto")
-	//private List<ListaDeseo> listaDeseo;
 	@ManyToMany
-	@JoinTable(name = "Lista_Deseos",
-	        joinColumns = @JoinColumn(name = "id_producto"),
-	        inverseJoinColumns = @JoinColumn(name = "id_deseos"))
+    @JoinTable(
+        name = "Carrito_Producto",
+        joinColumns = @JoinColumn(name = "id_producto"),
+        inverseJoinColumns = @JoinColumn(name = "id_carrito")
+    )
+	@JsonBackReference
+    private List<Carrito> carritos;
+	
+	@ManyToMany(mappedBy = "producto")
 	private List<ListaDeseo> listaDeseo;
+	
+	//@ManyToMany
+	//@JoinTable(name = "Lista_Deseos",
+	//        joinColumns = @JoinColumn(name = "id_producto"),
+	//        inverseJoinColumns = @JoinColumn(name = "id_deseos"))
+	//private List<ListaDeseo> listaDeseo;
 
-	@ManyToOne
-	@JoinColumn(name = "id_carrito")
-	private Carrito carrito;
+	//@ManyToOne
+	//@JoinColumn(name = "id_carrito")
+	//private Carrito carrito;
 	
 	@OneToMany(mappedBy = "producto")
     private List<DetallePedido> detallePedido;
@@ -105,36 +120,40 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy = "producto")
     private List<Devolucion> devolucion;
 	
-	public enum TipoPisada {
-	    PRONADOR,
-	    SUPINADOR,
-	    NEUTRO
-	}
+    public enum TipoPisada {
+        pronador,
+        supinador,
+        neutro
+    }
 
-	public enum TipoSuperficie {
-	    RUNNING,
-	    TRAIL,
-	    PISTA
-	}
+    public enum TipoSuperficie {
+        running,
+        trail,
+        pista
+    }
 
-	public enum TipoDistancia {
-	    CORTA,
-	    MEDIA_MARATON,
-	    MARATON,
-	    ULTRA
-	}
+    public enum TipoDistancia {
+        corta,
+        media_maraton,
+        maraton,
+        ultra
+    }
 
-	public enum Genero {
-	    MUJER,
-	    HOMBRE,
-	    UNISEX,
-	    JUNIOR
-	}
+    public enum Genero {
+        mujer,
+        hombre,
+        unisex,
+        junior
+    }
 
-	public enum Uso {
-	    ENTRENAMIENTO,
-	    COMPETICION,
-	    MIXTA
-	}
-	
+    public enum Uso {
+        entrenamiento,
+        competicion,
+        mixta
+    }
+    
+    public BigDecimal getPrecio() {
+        return this.precio != null ? this.precio : BigDecimal.ZERO;
+    }
+
 }

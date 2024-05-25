@@ -15,5 +15,5 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer> {
 	@Query("select p from Pedido p where p.usuario.idUsuario = :idUsuario")
 	List<Pedido> findOrderByUser(@Param("idUsuario") int idUsuario);
 
-	List<Pedido> findByUsuarioId(int idUsuario);
+	List<Pedido> findByUsuarioIdUsuario(int idUsuario);
 }

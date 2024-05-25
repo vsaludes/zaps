@@ -4,6 +4,7 @@ package com.edix.restful.zaps.service;
 
 import java.util.List;
 import com.edix.restful.zaps.modelo.entities.ListaDeseo;
+import com.edix.restful.zaps.modelo.entities.Producto;
 
 public interface ListaDeseoService {
 
@@ -12,4 +13,7 @@ public interface ListaDeseoService {
     boolean modificarListaDeseo(ListaDeseo listaDeseo);
     boolean crearListaDeseo(ListaDeseo listaDeseo);
     boolean eliminarListaDeseo(int idListaDeseo);
+    boolean agregarProductoAListaDeseos(int idListaDeseo, Producto producto);
+    boolean eliminarProductoDeListaDeseos(int idListaDeseo, Producto producto);
+    List<Producto> obtenerProductosListaDeseos(int idListaDeseo);
 }

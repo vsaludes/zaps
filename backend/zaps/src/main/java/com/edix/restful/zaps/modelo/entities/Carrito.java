@@ -5,12 +5,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -39,13 +44,49 @@ public class Carrito implements Serializable {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
     
-    @OneToMany(mappedBy = "carrito")
-    private List<Producto> producto;
+    //@ManyToOne
+    //@JoinColumn(name = "id_producto")
+    //private Producto producto;
+    
+    //@OneToMany(mappedBy = "carrito")
+    //private List<Producto> productos;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "Carrito_Producto",
+        joinColumns = @JoinColumn(name = "id_carrito"),
+        inverseJoinColumns = @JoinColumn(name = "id_producto")
+    )
+    @JsonManagedReference
+    private List<Producto> productos;
     
     private int cantidad;
-    private BigDecimal total;
+    
+    private BigDecimal subtotal;
     
     @Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
     
+    public List<Producto> getProductos() {
+        return this.productos;
+    }
+    
+    public int getCantidadProducto(Producto producto) {
+        for (Producto p : productos) {
+            if (p.getIdProducto() == producto.getIdProducto()) {
+                return p.getCantidad();
+            }
+        }
+        return 0; 
+    }
+    
+    public void setCantidadProducto(Producto producto, int cantidad) {
+        for (Producto p : productos) {
+            if (p.getIdProducto() == producto.getIdProducto()) {
+                p.setCantidad(cantidad);
+                return;
+            }
+        }
+        
+}
 }
