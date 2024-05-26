@@ -11,7 +11,7 @@ export class CategoriasService {
   constructor() { }
 
   async getAll():Promise<Categoria[]>{
-    const res = await fetch("./../../../../../backend/bbdd/database.json");
+    const res = await fetch("./../../../assets/data/database.json");
     const resJson = await res.json()
     return resJson
   }
