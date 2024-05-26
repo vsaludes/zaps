@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface CarritoController {
 
-    ResponseEntity<Carrito> buscarCarritoPorId(@PathVariable int id);
+    ResponseEntity<CarritoDTO> buscarCarritoPorId(@PathVariable int idCarrito);
 
     ResponseEntity<List<Carrito>> buscarTodosCarritos();
 
@@ -19,5 +19,7 @@ public interface CarritoController {
 
     ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO);
 
-    ResponseEntity<Void> eliminarCarrito(@PathVariable int id);
+    ResponseEntity<Void> eliminarCarrito(@PathVariable int idCarrito);
+
+    ResponseEntity<Void> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad);
 }

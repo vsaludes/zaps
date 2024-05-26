@@ -19,5 +19,6 @@ public interface CarritoService {
     //boolean agregarProductoAlCarrito(int idCarrito, Producto producto, int cantidad);
     boolean eliminarProductoDelCarrito(int idCarrito, Producto producto);
     BigDecimal calcularTotalCarrito(int idCarrito);
-	boolean agregarProductoAlCarrito(int idCarrito, ProductoDTO productoDTO);
+	boolean agregarProductoAlCarrito (int idCarrito, int idProducto, int cantidad);
+
 }

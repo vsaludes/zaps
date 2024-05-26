@@ -14,5 +14,11 @@ import lombok.NoArgsConstructor;
 public class ProductoDTO {
 
 	private int idProducto;
+	private String nombre;
     private int cantidad;
+    private BigDecimal precio;
+
+    public BigDecimal calcularPrecioTotal() {
+        return precio.multiply(BigDecimal.valueOf(cantidad));
+    }
 }
