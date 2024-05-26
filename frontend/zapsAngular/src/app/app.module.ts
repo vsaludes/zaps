@@ -6,23 +6,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './views/pages/header/header.component';
 import { FooterComponent } from './views/pages/footer/footer.component';
 import { ViewsModule } from './views/views.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { LoginComponent } from './auth/pages/login/login.component';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ViewsModule,
-    HttpClientModule,
-    AuthModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        ViewsModule,
+        AuthModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

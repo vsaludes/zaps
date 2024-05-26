@@ -5,22 +5,16 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  declarations: [
-    RegisterComponent,
-    LayoutComponent,
-    LoginComponent
-  ],
-  exports: [
-    LoginComponent
-  ]
-})
+@NgModule({ declarations: [
+        RegisterComponent,
+        LayoutComponent,
+        LoginComponent
+    ],
+    exports: [
+        LoginComponent
+    ], imports: [CommonModule,
+        AuthRoutingModule,
+        ReactiveFormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AuthModule { }
