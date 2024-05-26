@@ -7,7 +7,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -90,18 +92,24 @@ public class Producto implements Serializable {
 	private Date fechaActualizacion;
 	
 	@OneToMany(mappedBy="producto")
+	@JsonIgnore
 	private List<Valoracion> valoracion;
 	
-	@ManyToMany
+	/*@ManyToMany
     @JoinTable(
         name = "Carrito_Producto",
         joinColumns = @JoinColumn(name = "id_producto"),
         inverseJoinColumns = @JoinColumn(name = "id_carrito")
     )
 	@JsonBackReference
-    private List<Carrito> carritos;
+    private List<Carrito> carritos;*/
+	
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	private List<CarritoProducto> carritoProducto;
 	
 	@ManyToMany(mappedBy = "producto")
+	@JsonIgnore
 	private List<ListaDeseo> listaDeseo;
 	
 	//@ManyToMany
@@ -115,9 +123,11 @@ public class Producto implements Serializable {
 	//private Carrito carrito;
 	
 	@OneToMany(mappedBy = "producto")
+	@JsonIgnoreProperties("producto")
     private List<DetallePedido> detallePedido;
     
     @OneToMany(mappedBy = "producto")
+    @JsonIgnoreProperties("producto")
     private List<Devolucion> devolucion;
 	
     public enum TipoPisada {

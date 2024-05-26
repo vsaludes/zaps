@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import com.edix.restful.zaps.modelo.dto.CarritoDTO;
 import com.edix.restful.zaps.modelo.dto.CrearCarritoDTO;
 import com.edix.restful.zaps.modelo.dto.ProductoDTO;
+import com.edix.restful.zaps.modelo.dto.UsuarioDTO;
 import com.edix.restful.zaps.modelo.entities.Carrito;
+import com.edix.restful.zaps.modelo.entities.CarritoProducto;
 import com.edix.restful.zaps.modelo.entities.Producto;
+import com.edix.restful.zaps.modelo.entities.Usuario;
 import com.edix.restful.zaps.restcontroller.CarritoController;
 import com.edix.restful.zaps.service.CarritoService;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,13 +30,44 @@ public class CarritoRestControllerImpl implements CarritoController {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Carrito> buscarCarritoPorId(@PathVariable int id) {
-        Carrito carrito = carritoService.buscarCarritoPorId(id);
-        if (carrito != null) {
-            return ResponseEntity.ok(carrito);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<CarritoDTO> buscarCarritoPorId(@PathVariable("id") int idCarrito) {
+        Carrito carrito = carritoService.buscarCarritoPorId(idCarrito);
+        if (carrito == null) {
+            return ResponseEntity.notFound().build();
         }
+        CarritoDTO carritoDTO = convertirACarritoDTO(carrito);
+        return ResponseEntity.ok(carritoDTO);
+    }
+    private CarritoDTO convertirACarritoDTO(Carrito carrito) {
+        CarritoDTO carritoDTO = new CarritoDTO();
+        carritoDTO.setIdCarrito(carrito.getIdCarrito());
+        
+        
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        Usuario usuario = carrito.getUsuario();
+        usuarioDTO.setIdUsuario(usuario.getIdUsuario());
+        usuarioDTO.setUsername(usuario.getUsername());
+        
+        carritoDTO.setUsuario(usuarioDTO);
+        
+      
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        BigDecimal precioTotal = BigDecimal.ZERO;
+        for (CarritoProducto carritoProducto : carrito.getCarritoProducto()) {
+            ProductoDTO productoDTO = new ProductoDTO();
+            productoDTO.setIdProducto(carritoProducto.getProducto().getIdProducto());
+            productoDTO.setNombre(carritoProducto.getProducto().getNombre());
+            productoDTO.setCantidad(carritoProducto.getCantidad());
+            productoDTO.setPrecio(carritoProducto.getSubtotal());
+            
+            precioTotal = precioTotal.add(carritoProducto.getProducto().getPrecio().multiply(BigDecimal.valueOf(carritoProducto.getCantidad())));
+            
+            productosDTO.add(productoDTO);
+        }
+        
+        carritoDTO.setProductos(productosDTO);
+        carritoDTO.setPrecioTotal(precioTotal);
+        return carritoDTO;
     }
 
     @Override
@@ -65,8 +101,8 @@ public class CarritoRestControllerImpl implements CarritoController {
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarCarrito(@PathVariable int id) {
-        boolean result = carritoService.eliminarCarrito(id);
+    public ResponseEntity<Void> eliminarCarrito(@PathVariable int idCarrito) {
+        boolean result = carritoService.eliminarCarrito(idCarrito);
         if (result) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -74,12 +110,10 @@ public class CarritoRestControllerImpl implements CarritoController {
         }
     }
     
-        @PostMapping("/{idCarrito}/productos")
-        public ResponseEntity<Void> agregarProductoAlCarrito(
-                @PathVariable int idCarrito,
-                ProductoDTO productoDTO) {
+        @PostMapping("/{idCarrito}/{idProducto}/{cantidad}")
+        public ResponseEntity<Void> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad) {
 
-            boolean result = carritoService.agregarProductoAlCarrito(idCarrito, productoDTO);
+            boolean result = carritoService.agregarProductoAlCarrito(idCarrito, idProducto, cantidad);
             if (result) {
                 return ResponseEntity.status(HttpStatus.CREATED).build();
             } else {

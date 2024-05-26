@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,6 +56,7 @@ public class Usuario implements Serializable {
 	private Date ultimaConexion;
 		
 	@OneToMany(mappedBy="usuario")
+	@JsonIgnore
     private List<Valoracion> valoracion;
 
 	@OneToOne(mappedBy="usuario")
@@ -62,9 +64,11 @@ public class Usuario implements Serializable {
     private Carrito carrito;
 
     @OneToMany(mappedBy="usuario")
+    @JsonIgnore
     private List<Pedido> pedido;
 
     @OneToMany(mappedBy="usuario")
+    @JsonIgnore
     private List<ListaDeseo> listaDeseo;
     
 	//uni-directional many-to-many association to Perfil

@@ -9,3 +9,30 @@ CREATE TABLE carrito_producto (
     FOREIGN KEY (id_carrito) REFERENCES Carrito(id_carrito),
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
+
+ALTER TABLE Carrito DROP FOREIGN KEY carrito_ibfk_2;
+
+ALTER TABLE Carrito 
+DROP COLUMN id_producto,
+DROP COLUMN cantidad,
+DROP COLUMN subtotal;
+
+ALTER TABLE Carrito_Producto
+ADD cantidad INT,
+ADD subtotal DECIMAL(8, 2);
+
+ALTER TABLE carrito_producto
+DROP FOREIGN KEY carrito_producto_ibfk_1,
+DROP FOREIGN KEY carrito_producto_ibfk_2;
+
+ALTER TABLE carrito_producto
+DROP PRIMARY KEY;
+
+ALTER TABLE carrito_producto
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST;
+
+ALTER TABLE carrito_producto
+ADD CONSTRAINT fk_carrito
+FOREIGN KEY (id_carrito) REFERENCES carrito(id_carrito),
+ADD CONSTRAINT fk_producto
+FOREIGN KEY (id_producto) REFERENCES productos(id_producto);

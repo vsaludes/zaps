@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -50,12 +53,15 @@ public class Pedido implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name="id_usuario")
+	@JsonIgnore
     private Usuario usuario;
 	
 	@OneToMany(mappedBy = "pedido")
+	@JsonIgnore
     private List<Devolucion> devolucion;
 	
 	@OneToMany(mappedBy = "pedido")
+	@JsonIgnore
 	private List<DetallePedido> detallePedido;
 	
 	public enum EstadoPedido {

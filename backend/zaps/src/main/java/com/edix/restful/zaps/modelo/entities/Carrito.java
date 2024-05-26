@@ -2,11 +2,14 @@ package com.edix.restful.zaps.modelo.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +28,7 @@ import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -51,42 +55,69 @@ public class Carrito implements Serializable {
     //@OneToMany(mappedBy = "carrito")
     //private List<Producto> productos;
     
-    @ManyToMany
-    @JoinTable(
-        name = "Carrito_Producto",
-        joinColumns = @JoinColumn(name = "id_carrito"),
-        inverseJoinColumns = @JoinColumn(name = "id_producto")
-    )
-    @JsonManagedReference
-    private List<Producto> productos;
+    //@ManyToMany
+    //@JoinTable(
+      //  name = "Carrito_Producto",
+        //joinColumns = @JoinColumn(name = "id_carrito"),
+        //inverseJoinColumns = @JoinColumn(name = "id_producto")
+    //)
+    //@JsonManagedReference
+    //private List<Producto> productos;
     
-    private int cantidad;
+    //private int cantidad;
     
-    private BigDecimal subtotal;
+    //private BigDecimal subtotal;
+    
+    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL/*, orphanRemoval = true*/)
+    @JsonIgnore
+    private List<CarritoProducto> carritoProducto;
+
     
     @Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
     
+   
     public List<Producto> getProductos() {
-        return this.productos;
+        List<Producto> productos = new ArrayList<>();
+        for (CarritoProducto cp : carritoProducto) {
+            productos.add(cp.getProducto());
+        }
+        return productos;
     }
-    
+
     public int getCantidadProducto(Producto producto) {
-        for (Producto p : productos) {
-            if (p.getIdProducto() == producto.getIdProducto()) {
-                return p.getCantidad();
+        for (CarritoProducto cp : carritoProducto) {
+            if (cp.getProducto().getIdProducto() == producto.getIdProducto()) {
+                return cp.getCantidad();
             }
         }
         return 0; 
     }
-    
+
     public void setCantidadProducto(Producto producto, int cantidad) {
-        for (Producto p : productos) {
-            if (p.getIdProducto() == producto.getIdProducto()) {
-                p.setCantidad(cantidad);
+        for (CarritoProducto cp : carritoProducto) {
+            if (cp.getProducto().getIdProducto() == producto.getIdProducto()) {
+                cp.setCantidad(cantidad);
                 return;
             }
         }
-        
-}
+    }
+
+    public void agregarProducto(Producto producto, int cantidad) {
+        for (CarritoProducto cp : carritoProducto) {
+            if (cp.getProducto().getIdProducto() == producto.getIdProducto()) {
+                cp.setCantidad(cp.getCantidad() + cantidad);
+                cp.setSubtotal(cp.getProducto().getPrecio().multiply(BigDecimal.valueOf(cp.getCantidad())));
+                return;
+            }
+        }
+        CarritoProducto nuevoCarritoProducto = new CarritoProducto();
+        nuevoCarritoProducto.setCarrito(this);
+        nuevoCarritoProducto.setProducto(producto);
+        nuevoCarritoProducto.setCantidad(cantidad);
+        nuevoCarritoProducto.setSubtotal(producto.getPrecio().multiply(BigDecimal.valueOf(cantidad)));
+        carritoProducto.add(nuevoCarritoProducto);
+    }
+  
+
 }
