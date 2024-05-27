@@ -5,10 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import com.edix.restful.zaps.modelo.entities.Carrito;
+import com.edix.restful.zaps.modelo.entities.CarritoProducto;
 import com.edix.restful.zaps.modelo.entities.Pedido;
 import com.edix.restful.zaps.restcontroller.PedidoController;
+import com.edix.restful.zaps.service.CarritoService;
 import com.edix.restful.zaps.service.PedidoService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -17,11 +22,14 @@ public class PedidoRestControllerImpl implements PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+    @Autowired
+    private CarritoService carritoService;
+    
 
     @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<Pedido> buscarPedidoPorId(@PathVariable int id) {
-        Pedido pedido = pedidoService.buscarPedidoPorId(id);
+    @GetMapping("/{idPedido}")
+    public ResponseEntity<Pedido> buscarPedidoPorId(@PathVariable int idPedido) {
+        Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido != null) {
             return ResponseEntity.ok(pedido);
         } else {
@@ -37,9 +45,35 @@ public class PedidoRestControllerImpl implements PedidoController {
     }
 
     @Override
-    @PutMapping("/procesar/{id}")
-    public ResponseEntity<Void> procesarPedido(@PathVariable int id) {
-        boolean result = pedidoService.procesarPedido(id);
+    @PostMapping("/procesar/{idCarrito}")
+    public ResponseEntity<Void> procesarPedido(@PathVariable int idCarrito) {
+        Carrito carrito = carritoService.buscarCarritoPorId(idCarrito);
+        if (carrito == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        
+        BigDecimal precioTotal = calcularPrecioTotalCarrito(carrito);
+        
+        boolean result = pedidoService.procesarPedido(idCarrito, precioTotal);
+        if (result) {
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    private BigDecimal calcularPrecioTotalCarrito(Carrito carrito) {
+        BigDecimal precioTotal = BigDecimal.ZERO;
+        for (CarritoProducto carritoProducto : carrito.getCarritoProducto()) {
+            precioTotal = precioTotal.add(carritoProducto.getSubtotal());
+        }
+        return precioTotal;
+    }
+    
+    @Override
+    @PostMapping("/cancelar/{idPedido}")
+    public ResponseEntity<Void> cancelarPedido(@PathVariable int idPedido) {
+        boolean result = pedidoService.cancelarPedido(idPedido);
         if (result) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -48,9 +82,9 @@ public class PedidoRestControllerImpl implements PedidoController {
     }
 
     @Override
-    @PutMapping("/cancelar/{id}")
-    public ResponseEntity<Void> cancelarPedido(@PathVariable int id) {
-        boolean result = pedidoService.cancelarPedido(id);
+    @PostMapping("/entregar/{idPedido}")
+    public ResponseEntity<Void> marcarPedidoEntregado(@PathVariable int idPedido) {
+        boolean result = pedidoService.marcarPedidoEntregado(idPedido);
         if (result) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -59,13 +93,28 @@ public class PedidoRestControllerImpl implements PedidoController {
     }
 
     @Override
-    @PutMapping("/entregar/{id}")
-    public ResponseEntity<Void> marcarPedidoEntregado(@PathVariable int id) {
-        boolean result = pedidoService.marcarPedidoEntregado(id);
+    @GetMapping
+    public ResponseEntity<List<Pedido>> buscarTodosPedidos() {
+        try {
+            List<Pedido> pedidos = pedidoService.buscarTodos();
+            if (pedidos.isEmpty()) {
+                return ResponseEntity.noContent().build(); 
+            } else {
+                return ResponseEntity.ok(pedidos); 
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
+        }
+    }
+    @Override
+    @DeleteMapping("/{idPedido}")
+    public ResponseEntity<Void> eliminarPedidoPorId(@PathVariable int idPedido) {
+        boolean result = pedidoService.eliminarPedidoPorId(idPedido);
         if (result) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

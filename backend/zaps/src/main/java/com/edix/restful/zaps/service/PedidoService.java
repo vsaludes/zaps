@@ -1,5 +1,6 @@
 package com.edix.restful.zaps.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -11,9 +12,10 @@ public interface PedidoService {
 	
 	Pedido buscarPedidoPorId (int idPedido);
 	List<Pedido> buscarPedidoPorUsuario (int idUsuario);
-	//boolean borrarPedido (int idPedido);
-	boolean procesarPedido(int idPedido);
+	List<Pedido> buscarTodos();
+	boolean eliminarPedidoPorId(int idPedido);
 	boolean cancelarPedido(int idPedido);
 	boolean marcarPedidoEntregado(int idPedido);
+	boolean procesarPedido(int idCarrito, BigDecimal precioTotal);
 
 }

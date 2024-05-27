@@ -65,10 +65,10 @@ public class Pedido implements Serializable {
 	private List<DetallePedido> detallePedido;
 	
 	public enum EstadoPedido {
-	    PENDIENTE,
-	    ENVIADO,
-	    ENTREGADO,
-	    CANCELADO
+	    pendiente,
+	    enviado,
+	    entregado,
+	    cancelado
 	}
 	
 }
