@@ -36,3 +36,5 @@ ADD CONSTRAINT fk_carrito
 FOREIGN KEY (id_carrito) REFERENCES carrito(id_carrito),
 ADD CONSTRAINT fk_producto
 FOREIGN KEY (id_producto) REFERENCES productos(id_producto);
+
+ALTER TABLE Usuarios ADD COLUMN role VARCHAR(80);

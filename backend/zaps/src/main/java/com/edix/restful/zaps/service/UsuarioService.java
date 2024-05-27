@@ -1,6 +1,7 @@
 package com.edix.restful.zaps.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.modelo.entities.Usuario;
@@ -10,7 +11,7 @@ public interface UsuarioService {
       
     Usuario buscarUsuarioPorId(int idUsuario);    
     
-    Usuario buscarUsuarioPorNombre(String username);
+    Optional<Usuario> buscarUsuarioPorNombre(String username);
     
     Usuario buscarUsuarioPorEmail(String email);
     

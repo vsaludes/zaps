@@ -40,7 +40,7 @@
             <a routerLink="/auth/login" class="text-gray-600 hover:text-gray-800">Iniciar Sesión</a>
           </li>
           <li *ngIf="userLoginOn">
-            <a routerLink="/home" class="text-gray-600 hover:text-gray-800">Cerrar Sesión</a>
+            <a routerLink="/home" class="text-gray-600 hover:text-gray-800">Cerrar Sesión {{user?.username}}</a>
           </li>
         </ul>
       </div>

@@ -13,6 +13,7 @@ import com.edix.restful.zaps.repository.ValoracionRepository;
 import com.edix.restful.zaps.service.UsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -32,7 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario buscarUsuarioPorNombre(String username) {
+    public Optional<Usuario> buscarUsuarioPorNombre(String username) {
         return usuarioRepository.findByUsername(username);
     }
 

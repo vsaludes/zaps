@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from '../../../auth/Services/login.service';
+import { User } from '../../../auth/interface/user';
+import { UserService } from '../../../auth/Services/user.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +11,23 @@ import { LoginService } from '../../../auth/Services/login.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  errorMessage:String="";
+  user?:User;
+
   userLoginOn:boolean=false;
-  constructor(private loginService:LoginService) { }
+  constructor(private userService:UserService, private loginService:LoginService  ){
+    this.userService.getUser(environment.userId).subscribe({
+      next: (userData) => {
+        this.user=userData;
+      },
+      error: (errorData) => {
+        this.errorMessage=errorData
+      },
+      complete: () => {
+        console.info("User Data ok");
+      }
+    })
+  }
 
   ngOnDestroy(): void {
     this.loginService.currentUserLoginOn.unsubscribe();
@@ -24,5 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     )
   }
+
+
 
 }

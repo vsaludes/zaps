@@ -12,11 +12,18 @@ import com.edix.restful.zaps.modelo.entities.Usuario;
 import com.edix.restful.zaps.modelo.entities.Valoracion;
 import com.edix.restful.zaps.service.UsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class UsuarioRestControllerImpl {
+	
 
     @Autowired
     private UsuarioService usuarioService;
@@ -32,8 +39,8 @@ public class UsuarioRestControllerImpl {
     }
 
     @GetMapping("/nombre/{username}")
-    public ResponseEntity<Usuario> buscarUsuarioPorNombre(@PathVariable String username) {
-        Usuario usuario = usuarioService.buscarUsuarioPorNombre(username);
+    public ResponseEntity<Optional<Usuario>> buscarUsuarioPorNombre(@PathVariable String username) {
+        Optional<Usuario> usuario = usuarioService.buscarUsuarioPorNombre(username);
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
         } else {
@@ -125,5 +132,12 @@ public class UsuarioRestControllerImpl {
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+    
+    @GetMapping("/current")
+    public ResponseEntity<Optional<Usuario>> getCurrentUser(Principal principal) {
+        // Assuming you have a method to get user by username (principal.getName())
+        Optional<Usuario> user = usuarioService.buscarUsuarioPorNombre(principal.getName());
+        return ResponseEntity.ok(user);
     }
 }

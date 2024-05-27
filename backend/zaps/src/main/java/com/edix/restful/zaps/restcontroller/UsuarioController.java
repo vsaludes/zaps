@@ -10,6 +10,7 @@ import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.modelo.entities.Usuario;
 import com.edix.restful.zaps.modelo.entities.Valoracion;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UsuarioController {
@@ -33,4 +34,6 @@ public interface UsuarioController {
     ResponseEntity<Void> eliminarValoracionDeUsuario(int id, @RequestBody Valoracion valoracion);
 
     ResponseEntity<Void> enviarNotificacionProducto(int id, @RequestBody Producto producto);
+    
+    ResponseEntity<Usuario> getCurrentUser(Principal principal);
 }

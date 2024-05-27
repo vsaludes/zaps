@@ -10,8 +10,9 @@ import { LoginRequest } from '../../interface/loginRequest';
   styles: ``
 })
 export class LoginComponent implements OnInit{
+  loginError:String="";
   loginForm = this.formBuilder.group({
-    email:['hola@gmail.com', [Validators.required, Validators.email]],
+    username:['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   })
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit{
   }
 
   get email(){
-    return this.loginForm.controls.email;
+    return this.loginForm.controls.username;
   }
 
   get password()
@@ -32,12 +33,14 @@ export class LoginComponent implements OnInit{
 
   login(){
     if(this.loginForm.valid){
+      this.loginError="";
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
-          console.log(userData)
+          console.log(userData);
         },
         error: (errorData) => {
-          console.log(errorData)
+          console.error(errorData);
+          this.loginError=errorData;
         },
         complete: () => {
           console.log("login completo");
