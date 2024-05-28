@@ -12,7 +12,7 @@ import com.edix.restful.zaps.Auth.RegisterRequest;
 import com.edix.restful.zaps.Auth.Role;
 import com.edix.restful.zaps.modelo.entities.Usuario;
 import com.edix.restful.zaps.repository.UsuarioRepository;
-import com.edix.restful.zapsJwt.JwtService;
+import com.edix.restful.zaps.security.JwtService;
 
 import lombok.RequiredArgsConstructor;
 
