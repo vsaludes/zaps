@@ -1,13 +1,10 @@
 package com.edix.restful.zaps.modelo.entities;
 
-
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -65,7 +62,7 @@ public class Usuario implements Serializable, UserDetails {
 	private boolean enabled;
 	@Enumerated(EnumType.STRING)
 	Role role;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_registro")
 	private Date fechaRegistro;

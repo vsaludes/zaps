@@ -17,6 +17,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -38,22 +39,24 @@ public class ListaDeseo implements Serializable {
     @Column(name="id_deseos")
     private int idDeseos;
 
-    @ManyToOne
+    //@ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_usuario")
     @JsonIgnore
     private Usuario usuario;
 
     @ManyToMany
     @JsonIgnore
-    @JoinTable(name = "Lista_Deseos",
+    @JoinTable(name = "lista_deseos_productos",
             joinColumns = @JoinColumn(name = "id_deseos"),
             inverseJoinColumns = @JoinColumn(name = "id_producto"))
     private List<Producto> producto;
 
+    /*
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_agregado")
 	private Date fechaAgregado;
     
     private boolean notificar;
-
+	*/
 }

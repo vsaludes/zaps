@@ -38,6 +38,7 @@ public class CarritoRestControllerImpl implements CarritoController {
         CarritoDTO carritoDTO = convertirACarritoDTO(carrito);
         return ResponseEntity.ok(carritoDTO);
     }
+    
     private CarritoDTO convertirACarritoDTO(Carrito carrito) {
         CarritoDTO carritoDTO = new CarritoDTO();
         carritoDTO.setIdCarrito(carrito.getIdCarrito());
@@ -87,7 +88,26 @@ public class CarritoRestControllerImpl implements CarritoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+///////////////////////////////////////NECESITO SACAR ID DE USUARIO AUTENTICADO O ASIGNARLO
+    /* AL REGISTRARSE public class RegistroUsuarioService {
+    
+    @Autowired
+    private CarritoService carritoService;
 
+    public void registrarUsuario(Usuario usuario) {
+        // Lógica para registrar al usuario
+        
+        // Crear un nuevo carrito para el usuario
+        Carrito carrito = new Carrito();
+        carrito.setUsuario(usuario);
+        
+        // Guardar el carrito en la base de datos
+        carritoService.guardarCarrito(carrito);
+        
+        // Otras acciones de registro, como enviar un correo electrónico de confirmación, etc.
+    }
+}
+*/
     @Override
     @PostMapping
     public ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO) {

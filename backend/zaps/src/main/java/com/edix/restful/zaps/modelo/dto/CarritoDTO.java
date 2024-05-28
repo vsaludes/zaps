@@ -19,4 +19,11 @@ public class CarritoDTO {
 	        }
 	        return precioTotal;
 	    }
+	    public BigDecimal getPrecioTotal() {
+	        return precioTotal;
+	    }
+	    public void setPrecioTotal(BigDecimal precioTotal) {
+	        this.precioTotal = precioTotal;
+	    }
+	    
 }
