@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { Producto } from '../../../core/interfaces/producto';
+
 
 @Component({
   selector: 'app-producto',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './producto.component.css'
 })
 export class ProductoComponent {
+
+  @Input({required:true}) producto!:Producto;
+
 
 }
