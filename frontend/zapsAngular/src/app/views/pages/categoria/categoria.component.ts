@@ -1,12 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Categoria } from '../../../core/interfaces/categoria';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
-  styleUrl: './categoria.component.css'
+  styleUrl: './categoria.component.css',
+
 })
-export class CategoriaComponent {
+export class CategoriaComponent{
+
 
   @Input({required:true}) categoria!:Categoria;
 }

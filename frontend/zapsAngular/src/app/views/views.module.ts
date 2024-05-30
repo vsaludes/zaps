@@ -8,6 +8,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CarouselComponent } from './pages/carousel/carousel.component';
 import { ProductoComponent } from './pages/producto/producto.component';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
+import { AsfaltoComponent } from './pages/asfalto/asfalto.component';
+import { TrailComponent } from './pages/trail/trail.component';
 
 
 
@@ -19,7 +21,9 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
     HomeComponent,
     CarouselComponent,
     ProductoComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    AsfaltoComponent,
+    TrailComponent,
   ],
   imports: [
     CommonModule,

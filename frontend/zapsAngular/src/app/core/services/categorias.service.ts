@@ -13,7 +13,7 @@ export class CategoriasService {
   async getAll():Promise<Categoria[]>{
     const res = await fetch("./../../../assets/data/database.json");
     const resJson = await res.json()
-    return resJson
+    return resJson;
   }
 
 }
