@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { RegisterRequest } from '../interface/registerRequest';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { RegisterRequest } from '../interface/registerRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(data: RegisterRequest): Observable<any> {
-    return this.http.post<any>(`${environment.urlHost}auth/register`, data).pipe(
+  register(userData: RegisterRequest): Observable<any> {
+    return this.http.post<any>(environment.urlHost + "auth/register", userData).pipe(
       catchError(this.handleError)
     );
   }

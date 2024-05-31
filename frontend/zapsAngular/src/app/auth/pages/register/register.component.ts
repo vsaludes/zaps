@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../Services/register.service';
 import { RegisterRequest } from '../../interface/registerRequest';
@@ -18,9 +18,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      nombre: ['', Validators.required],
+      direccion: ['', Validators.required],
+      telefono: ['', Validators.required]
     }, {
-      validators: this.mustMatch('password', 'confirmPassword') // Utilizamos "validators" en lugar de "validator"
+      validators: this.mustMatch('password', 'confirmPassword')
     });
   }
 
@@ -53,7 +56,7 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  register() {
+  onSubmit() {
     if (this.registerForm.valid) {
       this.registerError = '';
       this.registerService.register(this.registerForm.value as RegisterRequest).subscribe({
@@ -66,15 +69,12 @@ export class RegisterComponent implements OnInit {
         },
         complete: () => {
           console.log('Registro completo');
-          this.router.navigateByUrl('/login'); // Redirigir al componente de inicio de sesión después del registro
+          this.router.navigateByUrl('/login');
           this.registerForm.reset();
         }
       });
     } else {
-      this.registerForm.markAllAsTouched();
       alert('Error al ingresar los datos');
     }
   }
-
-
 }

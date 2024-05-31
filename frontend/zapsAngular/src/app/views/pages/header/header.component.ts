@@ -3,6 +3,7 @@ import { LoginService } from '../../../auth/Services/login.service';
 import { User } from '../../../auth/interface/user';
 import { UserService } from '../../../auth/Services/user.service';
 import { environment } from '../../../../environments/environment';
+import { LoginComponent } from '../../../auth/pages/login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -41,6 +42,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  logout(): void {
+    this.loginService.logout();
   }
 
 
