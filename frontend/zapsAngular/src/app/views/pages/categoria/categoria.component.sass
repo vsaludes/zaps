@@ -1,0 +1,22 @@
+
+.container {
+  width: 100vw; /* Ocupa todo el ancho de la pantalla */
+  height: 200px; /* Altura fija para simular un "nav" */
+  display: flex; /* Utiliza flexbox para colocar los elementos horizontalmente */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+
+.container > div {
+  flex: 1; /* Ocupa todo el espacio disponible */
+  text-align: center; /* Centra horizontalmente el texto */
+  background-size: cover; /* Cubre todo el contenedor con la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen */
+}
+
+
+.container > div > h3 {
+  margin: 0; /* Elimina el margen predeterminado del h3 */
+  color: white; /* Color del texto */
+}

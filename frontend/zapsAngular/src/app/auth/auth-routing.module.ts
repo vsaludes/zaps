@@ -11,7 +11,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'new-account', component: RegisterComponent },
+      { path: 'register', component: RegisterComponent },
       { path: '**', redirectTo: 'login' },
     ]
   }
