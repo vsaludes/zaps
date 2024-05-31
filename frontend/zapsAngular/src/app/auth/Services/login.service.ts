@@ -49,6 +49,10 @@ export class LoginService {
     return this.currentUserLoginOn.asObservable();
   }
 
+  get userToken():String{
+    return this.currentUserData.value;
+  }
+
   logout():void{
     sessionStorage.removeItem("token");
     this.currentUserLoginOn.next(false);
