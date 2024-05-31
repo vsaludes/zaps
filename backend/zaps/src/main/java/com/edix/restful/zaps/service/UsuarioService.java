@@ -19,9 +19,9 @@ public interface UsuarioService {
     
     boolean modificarUsuario(Usuario usuario);
        
-    boolean agregarAListaDeseos(Usuario usuario, Producto producto);
+    boolean agregarAListaDeseos(int idUsuario, int idProducto);
     
-    boolean eliminarDeListaDeseos(Usuario usuario, Producto producto);
+    boolean eliminarDeListaDeseos(int idUsuario, int idProducto);
     
     boolean agregarValoracionAUsuario(Usuario usuario, Valoracion valoracion);
     
@@ -29,7 +29,7 @@ public interface UsuarioService {
     
     boolean enviarNotificacionProducto(Usuario usuario, Producto producto);
     
-    //Para panel ADMIN, sin llegar desde el registro
     boolean crearUsuario(Usuario usuario);
         
+    boolean eliminarUsuario(int idUsuario);
 }

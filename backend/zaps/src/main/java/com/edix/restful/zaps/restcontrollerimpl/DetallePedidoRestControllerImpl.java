@@ -13,14 +13,14 @@ import com.edix.restful.zaps.service.DetallePedidoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/detallesPedido")
+@RequestMapping("/api/detallespedido")
 public class DetallePedidoRestControllerImpl implements DetallePedidoController {
 
     @Autowired
     private DetallePedidoService detallePedidoService;
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping("/{idDetallePedido}")
     public ResponseEntity<DetallePedido> buscarDetallePedidoPorId(@PathVariable int id) {
         DetallePedido detallePedido = detallePedidoService.buscarDetallePedidoPorId(id);
         if (detallePedido != null) {
@@ -60,7 +60,7 @@ public class DetallePedidoRestControllerImpl implements DetallePedidoController 
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idDetallePedido}")
     public ResponseEntity<Void> eliminarDetallePedido(@PathVariable int id) {
         boolean result = detallePedidoService.eliminarDetallePedido(id);
         if (result) {

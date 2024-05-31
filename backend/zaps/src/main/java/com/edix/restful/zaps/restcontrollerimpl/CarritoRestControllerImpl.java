@@ -29,8 +29,8 @@ public class CarritoRestControllerImpl implements CarritoController {
     private CarritoService carritoService;
 
     @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<CarritoDTO> buscarCarritoPorId(@PathVariable("id") int idCarrito) {
+    @GetMapping("/{idCarrito}")
+    public ResponseEntity<CarritoDTO> buscarCarritoPorId(@PathVariable int idCarrito) {
         Carrito carrito = carritoService.buscarCarritoPorId(idCarrito);
         if (carrito == null) {
             return ResponseEntity.notFound().build();
@@ -88,39 +88,9 @@ public class CarritoRestControllerImpl implements CarritoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-///////////////////////////////////////NECESITO SACAR ID DE USUARIO AUTENTICADO O ASIGNARLO
-    /* AL REGISTRARSE public class RegistroUsuarioService {
-    
-    @Autowired
-    private CarritoService carritoService;
-
-    public void registrarUsuario(Usuario usuario) {
-        // Lógica para registrar al usuario
-        
-        // Crear un nuevo carrito para el usuario
-        Carrito carrito = new Carrito();
-        carrito.setUsuario(usuario);
-        
-        // Guardar el carrito en la base de datos
-        carritoService.guardarCarrito(carrito);
-        
-        // Otras acciones de registro, como enviar un correo electrónico de confirmación, etc.
-    }
-}
-*/
-    @Override
-    @PostMapping
-    public ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO) {
-    	boolean result = carritoService.crearCarrito(crearCarritoDTO.getIdUsuario());
-        if (result) {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-    }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idCarrito}")
     public ResponseEntity<Void> eliminarCarrito(@PathVariable int idCarrito) {
         boolean result = carritoService.eliminarCarrito(idCarrito);
         if (result) {
@@ -130,15 +100,36 @@ public class CarritoRestControllerImpl implements CarritoController {
         }
     }
     
-        @PostMapping("/{idCarrito}/{idProducto}/{cantidad}")
-        public ResponseEntity<Void> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad) {
+     @PostMapping("/{idCarrito}/{idProducto}/{cantidad}")
+        public ResponseEntity<String> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad) {
 
             boolean result = carritoService.agregarProductoAlCarrito(idCarrito, idProducto, cantidad);
             if (result) {
-                return ResponseEntity.status(HttpStatus.CREATED).build();
+                return ResponseEntity.ok("Producto agregado al carrito correctamente.");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se pudo agregar el producto all carrito.");
             }
         }
-    }
+     
+     @DeleteMapping("/{idCarrito}/{idProducto}/{cantidad}")
+     public ResponseEntity<String> eliminarProductoDelCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad) {
+         boolean result = carritoService.eliminarProductoDelCarrito(idCarrito, idProducto, cantidad);
+         if (result) {
+             return ResponseEntity.ok("Producto eliminado del carrito correctamente.");
+         } else {
+             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se pudo eliminar el producto del carrito.");
+         }
+     }
+     
+      @GetMapping("/usuario/{idUsuario}")
+        public ResponseEntity<CarritoDTO> buscarCarritoPorIdUsuario(@PathVariable int idUsuario) {
+            Carrito carrito = carritoService.buscarCarritoPorIdUsuario(idUsuario);
+            if (carrito == null) {
+                return ResponseEntity.notFound().build();
+            }
+            CarritoDTO carritoDTO = convertirACarritoDTO(carrito);
+            return ResponseEntity.ok(carritoDTO);
+        }
+
+		    }
 

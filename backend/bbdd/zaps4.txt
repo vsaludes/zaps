@@ -1,0 +1,5 @@
+ALTER TABLE Carrito DROP COLUMN fecha;
+
+ALTER TABLE Usuarios DROP COLUMN verificado;
+
+ALTER TABLE Productos MODIFY COLUMN talla ENUM('T38', 'T39', 'T40', 'T41', 'T42', 'T43', 'T44') NOT NULL;

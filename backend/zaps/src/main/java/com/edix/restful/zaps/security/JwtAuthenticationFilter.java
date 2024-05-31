@@ -1,5 +1,4 @@
 package com.edix.restful.zaps.security;
-
 import java.io.IOException;
 
 import org.springframework.http.HttpHeaders;

@@ -10,10 +10,13 @@ import com.edix.restful.zaps.modelo.entities.Carrito;
 import com.edix.restful.zaps.modelo.entities.CarritoProducto;
 import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.modelo.entities.Usuario;
+import com.edix.restful.zaps.repository.CarritoProductoRepository;
 import com.edix.restful.zaps.repository.CarritoRepository;
 import com.edix.restful.zaps.repository.ProductoRepository;
 import com.edix.restful.zaps.repository.UsuarioRepository;
 import com.edix.restful.zaps.service.CarritoService;
+
+import jakarta.transaction.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,6 +30,8 @@ public class CarritoServiceImpl implements CarritoService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CarritoProductoRepository carritoProductoRepository;
 
     @Override
     public Carrito buscarCarritoPorId(int idCarrito) {
@@ -48,24 +53,13 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public boolean crearCarrito(int idUsuario) {
-        // Verificar si ya existe un carrito para el usuario
-        Carrito carritoExistente = carritoRepository.findByUsuarioId(idUsuario);
-        if (carritoExistente != null) {
-            return false; // Ya existe un carrito para este usuario
+    public boolean crearCarrito(Carrito carrito) {
+        try {
+            carritoRepository.save(carrito);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        
-        // Si no existe, crear un nuevo carrito
-        Carrito nuevoCarrito = new Carrito();
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        if (usuario == null) {
-            return false; // El usuario no existe
-        }
-        nuevoCarrito.setUsuario(usuario);
-        
-        // Guardar el nuevo carrito en la base de datos
-        carritoRepository.save(nuevoCarrito);
-        return true;
     }
 
     @Override
@@ -77,30 +71,6 @@ public class CarritoServiceImpl implements CarritoService {
         return false;
     }
     
-    /*@Override
-    public boolean agregarProductoAlCarrito(int idCarrito, ProductoDTO productoDTO) {
-        Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
-        if (carrito != null) {
-            List<Producto> productos = carrito.getProductos();
-            for (Producto p : productos) {
-                if (p.getIdProducto() == productoDTO.getIdProducto()) {
-                    p.setCantidad(p.getCantidad() + productoDTO.getCantidad());
-                    
-                    actualizarSubtotal(carrito);
-                    carritoRepository.save(carrito);
-                    return true;
-                }
-            }
-            Producto nuevoProducto = new Producto();
-            nuevoProducto.setIdProducto(productoDTO.getIdProducto());
-            nuevoProducto.setCantidad(productoDTO.getCantidad());
-            productos.add(nuevoProducto);
-            actualizarSubtotal(carrito);
-            carritoRepository.save(carrito);
-            return true;
-        }
-        return false;
-    }*/
     @Override
     public boolean agregarProductoAlCarrito(int idCarrito, int idProducto, int cantidad) {
         Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
@@ -119,20 +89,35 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public boolean eliminarProductoDelCarrito(int idCarrito, Producto producto) {
+    @Transactional
+    public boolean eliminarProductoDelCarrito(int idCarrito, int idProducto, int cantidad) {
         Carrito carrito = carritoRepository.findById(idCarrito).orElse(null);
-        if (carrito != null) {
-            List<Producto> productos = carrito.getProductos();
-            for (int i = 0; i < productos.size(); i++) {
-                if (productos.get(i).getIdProducto() == producto.getIdProducto()) {
-                    productos.remove(i);
+        if (carrito == null) {
+            return false;
+        }
+
+        List<CarritoProducto> carritoProductos = carrito.getCarritoProducto();
+        for (CarritoProducto carritoProducto : carritoProductos) {
+            if (carritoProducto.getProducto().getIdProducto() == idProducto) {
+                int cantidadActual = carritoProducto.getCantidad();
+                if (cantidadActual == cantidad) {
+                	if (carritoProductos.size() == 1) {
+                        carrito.getCarritoProducto().remove(carritoProducto);
+                    carritoProductoRepository.deleteByProductoIdProducto(idProducto);}
+                } else {
+                    int nuevaCantidad = cantidadActual - cantidad;
+                    carritoProducto.setCantidad(nuevaCantidad);
+                    BigDecimal nuevoSubtotal = carritoProducto.getProducto().getPrecio().multiply(BigDecimal.valueOf(nuevaCantidad));
+                    carritoProducto.setSubtotal(nuevoSubtotal);
                     carritoRepository.save(carrito);
-                    return true;
                 }
+                
+                return true;
             }
         }
         return false;
     }
+
 
     @Override
     public BigDecimal calcularTotalCarrito(int idCarrito) {
@@ -146,4 +131,10 @@ public class CarritoServiceImpl implements CarritoService {
         }
         return BigDecimal.ZERO;
     }
+
+	@Override
+	public Carrito buscarCarritoPorIdUsuario(int idUsuario) {
+		
+		return carritoRepository.findByUsuarioId(idUsuario);
+	}
 }

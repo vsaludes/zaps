@@ -17,9 +17,13 @@ public interface CarritoController {
 
     ResponseEntity<Void> modificarCarrito(@RequestBody Carrito carrito);
 
-    ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO);
+    //ResponseEntity<Void> crearCarrito(@RequestBody CrearCarritoDTO crearCarritoDTO);
 
     ResponseEntity<Void> eliminarCarrito(@PathVariable int idCarrito);
 
-    ResponseEntity<Void> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad);
+    ResponseEntity<String> agregarProductoAlCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad);
+    
+    ResponseEntity<CarritoDTO> buscarCarritoPorIdUsuario(@PathVariable int idUsuario);
+    
+    ResponseEntity<String> eliminarProductoDelCarrito(@PathVariable int idCarrito, @PathVariable int idProducto, @PathVariable int cantidad);
 }

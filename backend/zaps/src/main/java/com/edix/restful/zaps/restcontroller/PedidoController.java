@@ -12,11 +12,11 @@ public interface PedidoController {
 
     ResponseEntity<List<Pedido>> buscarPedidoPorUsuario(int idUsuario);
 
-    ResponseEntity<Void> procesarPedido(int idCarrito);
+    ResponseEntity<Object> procesarPedido(int idCarrito);
 
-    ResponseEntity<Void> cancelarPedido(int idPedido);
+    ResponseEntity<String> cancelarPedido(int idPedido);
 
-    ResponseEntity<Void> marcarPedidoEntregado(int idPedido);
+    ResponseEntity<String> marcarPedidoEntregado(int idPedido);
     
     ResponseEntity<List<Pedido>> buscarTodosPedidos();
     
