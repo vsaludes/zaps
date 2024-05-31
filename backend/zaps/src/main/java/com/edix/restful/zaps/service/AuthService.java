@@ -44,6 +44,7 @@ public class AuthService {
             .email(request.getEmail())
             .direccion(request.getDireccion())
             .telefono(request.getTelefono())
+            .enabled(true)
             .role(Role.USER)
             .build();
 
