@@ -10,6 +10,7 @@ import com.edix.restful.zaps.modelo.entities.Valoracion;
 import com.edix.restful.zaps.repository.ProductoRepository;
 import com.edix.restful.zaps.repository.UsuarioRepository;
 import com.edix.restful.zaps.repository.ValoracionRepository;
+import com.edix.restful.zaps.service.ListaDeseoService;
 import com.edix.restful.zaps.service.UsuarioService;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Autowired
     private ValoracionRepository valoracionRepository;
+    
+    @Autowired
+    private ListaDeseoService listaDeseoService;
 
     @Override
     public Usuario buscarUsuarioPorId(int idUsuario) {
@@ -109,6 +113,20 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public boolean enviarNotificacionProducto(Usuario usuario, Producto producto) {
         // Implementar lógica de notificación
+        return true;
+    }
+
+	@Override
+	public boolean crearUsuario(Usuario usuario) {
+		if (usuarioRepository.existsByUsername(usuario.getUsername()) || usuarioRepository.existsByEmail(usuario.getEmail())) {
+		return false;
+	}
+		usuarioRepository.save(usuario);
+        
+        ListaDeseo listaDeseo = new ListaDeseo();
+        listaDeseo.setUsuario(usuario);
+        listaDeseoService.crearListaDeseo(listaDeseo);
+        
         return true;
     }
 }

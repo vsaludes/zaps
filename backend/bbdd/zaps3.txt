@@ -1,0 +1,21 @@
+ALTER TABLE Lista_Deseos DROP FOREIGN KEY lista_deseos_ibfk_2;
+
+ALTER TABLE Lista_Deseos DROP COLUMN id_producto;
+
+CREATE TABLE lista_deseos_productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_deseos INT,
+    id_producto INT,
+    FOREIGN KEY (id_deseos) REFERENCES Lista_Deseos(id_deseos),
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+);
+
+ALTER TABLE Lista_Deseos DROP COLUMN fecha_agregado, DROP COLUMN notificar;
+
+ALTER TABLE lista_deseos_productos
+ADD COLUMN fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN notificar BOOLEAN;
+
+ALTER TABLE Usuarios ADD COLUMN role VARCHAR(80);
+
+ALTER TABLE Usuarios MODIFY COLUMN password VARCHAR(255) NOT NULL;

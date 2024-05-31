@@ -28,5 +28,8 @@ public interface UsuarioService {
     boolean eliminarValoracionDeUsuario(Usuario usuario, Valoracion valoracion);
     
     boolean enviarNotificacionProducto(Usuario usuario, Producto producto);
+    
+    //Para panel ADMIN, sin llegar desde el registro
+    boolean crearUsuario(Usuario usuario);
         
 }

@@ -23,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class UsuarioRestControllerImpl {
-	
 
     @Autowired
     private UsuarioService usuarioService;
@@ -133,7 +132,7 @@ public class UsuarioRestControllerImpl {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    
+
     @GetMapping("/current")
     public ResponseEntity<Optional<Usuario>> getCurrentUser(Principal principal) {
         // Assuming you have a method to get user by username (principal.getName())

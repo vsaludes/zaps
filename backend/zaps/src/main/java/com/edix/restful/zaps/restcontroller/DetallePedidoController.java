@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DetallePedidoController {
 
-    ResponseEntity<DetallePedido> buscarDetallePedidoPorId(@PathVariable int id);
+    ResponseEntity<DetallePedido> buscarDetallePedidoPorId(@PathVariable int idPedido);
 
     ResponseEntity<List<DetallePedido>> buscarTodosDetallesPedido();
 
@@ -17,5 +17,5 @@ public interface DetallePedidoController {
 
     ResponseEntity<Void> crearDetallePedido(@RequestBody DetallePedido detallePedido);
 
-    ResponseEntity<Void> eliminarDetallePedido(@PathVariable int id);
+    ResponseEntity<Void> eliminarDetallePedido(@PathVariable int idPedido);
 }

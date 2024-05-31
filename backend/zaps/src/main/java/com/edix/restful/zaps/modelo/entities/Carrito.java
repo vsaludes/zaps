@@ -118,6 +118,7 @@ public class Carrito implements Serializable {
         nuevoCarritoProducto.setSubtotal(producto.getPrecio().multiply(BigDecimal.valueOf(cantidad)));
         carritoProducto.add(nuevoCarritoProducto);
     }
+
   
 
 }

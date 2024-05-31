@@ -7,18 +7,61 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.edix.restful.zaps.modelo.entities.ListaDeseo;
+import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.restcontroller.ListaDeseoController;
 import com.edix.restful.zaps.service.ListaDeseoService;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/listasDeseo")
-public class ListaDeseoRestControllerImpl implements ListaDeseoController {
+    @RestController
+    @RequestMapping("/api/listadeseos")
+    public class ListaDeseoRestControllerImpl implements ListaDeseoController {
 
-    @Autowired
-    private ListaDeseoService listaDeseoService;
+        @Autowired
+        private ListaDeseoService listaDeseoService;
 
+        @PostMapping("/{idListaDeseo}/{idProducto}")
+        public ResponseEntity<Void> agregarProducto(@PathVariable int idListaDeseo, @PathVariable int idProducto) {
+            boolean exito = listaDeseoService.agregarProductoAListaDeseos(idListaDeseo, idProducto);
+            if (exito) {
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+
+        @DeleteMapping("/{idListaDeseo}/{idProducto}")
+        public ResponseEntity<Void> eliminarProducto(@PathVariable int idListaDeseo, @PathVariable int idProducto) {
+            boolean exito = listaDeseoService.eliminarProductoDeListaDeseos(idListaDeseo, idProducto);
+            if (exito) {
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+
+        @GetMapping("/{idListaDeseo}")
+        public ResponseEntity<List<Producto>> obtenerProductos(@PathVariable int idListaDeseo) {
+            List<Producto> productos = listaDeseoService.obtenerProductosListaDeseos(idListaDeseo);
+            if (!productos.isEmpty()) {
+                return ResponseEntity.ok(productos);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        }
+        
+        @PutMapping("/{idListaDeseo}/{idProducto}/notificar")
+        public ResponseEntity<Void> actualizarNotificacionProducto(@PathVariable int idListaDeseo, @PathVariable int idProducto, @RequestParam boolean notificar) {
+            boolean exito = listaDeseoService.notificacionProducto(idListaDeseo, idProducto, notificar);
+            if (exito) {
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+    }
+    
+    /*
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<ListaDeseo> buscarListaDeseoPorId(@PathVariable int id) {
@@ -70,3 +113,4 @@ public class ListaDeseoRestControllerImpl implements ListaDeseoController {
         }
     }
 }
+*/

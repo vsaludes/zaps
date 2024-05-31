@@ -8,13 +8,17 @@ import java.util.List;
 
 public interface PedidoController {
 
-    ResponseEntity<Pedido> buscarPedidoPorId(@PathVariable int id);
+    ResponseEntity<Pedido> buscarPedidoPorId(int idPedido);
 
-    ResponseEntity<List<Pedido>> buscarPedidoPorUsuario(@PathVariable int idUsuario);
+    ResponseEntity<List<Pedido>> buscarPedidoPorUsuario(int idUsuario);
 
-    ResponseEntity<Void> procesarPedido(@PathVariable int id);
+    ResponseEntity<Void> procesarPedido(int idCarrito);
 
-    ResponseEntity<Void> cancelarPedido(@PathVariable int id);
+    ResponseEntity<Void> cancelarPedido(int idPedido);
 
-    ResponseEntity<Void> marcarPedidoEntregado(@PathVariable int id);
+    ResponseEntity<Void> marcarPedidoEntregado(int idPedido);
+    
+    ResponseEntity<List<Pedido>> buscarTodosPedidos();
+    
+    ResponseEntity<Void> eliminarPedidoPorId(int idPedido);
 }

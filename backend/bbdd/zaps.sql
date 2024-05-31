@@ -5,7 +5,7 @@ use zaps_2024;
 CREATE TABLE Usuarios (
     id_usuario INT not null AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(25) not null,
-    password VARCHAR(255) not null,
+    password VARCHAR(25) not null,
     nombre VARCHAR(50) not null,
     email VARCHAR(100) UNIQUE not null,
     direccion VARCHAR(255),

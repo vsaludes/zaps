@@ -34,6 +34,6 @@ public interface UsuarioController {
     ResponseEntity<Void> eliminarValoracionDeUsuario(int id, @RequestBody Valoracion valoracion);
 
     ResponseEntity<Void> enviarNotificacionProducto(int id, @RequestBody Producto producto);
-    
+
     ResponseEntity<Usuario> getCurrentUser(Principal principal);
 }
