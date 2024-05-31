@@ -83,6 +83,10 @@ public class CarritoServiceImpl implements CarritoService {
             return false;
         }
 
+        if (producto.getStock() < cantidad) {
+            return false; 
+        }
+        
         carrito.agregarProducto(producto, cantidad);
         carritoRepository.save(carrito);
         return true;
