@@ -25,7 +25,7 @@
          {
            "id": 2,
            "nombre": "Novablast 4",
-           "descripcion": "---",
+           "descripcion": "Las Novablast 4 de Asics son perfectas para corredores con pisada neutra que buscan una amortiguación superior. Con un drop de 8 mm y un diseño moderno en color verde, estas zapatillas son ideales para distancias desde carreras cortas hasta maratones. Ideales para entrenamientos diarios, combinan comodidad y rendimiento para cualquier nivel de corredor.",
            "precio": 139,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Verde",
@@ -43,7 +43,7 @@
          {
            "id": 3,
            "nombre": "Boston 12",
-           "descripcion": "---",
+           "descripcion": "Las Boston 12 de Adidas son las zapatillas ideales para corredores de pisada neutra que buscan rendimiento y durabilidad. Con un drop de 7 mm y un diseño elegante en color azul, estas zapatillas son adecuadas tanto para entrenamientos como para competiciones. Son versátiles para todas las distancias, desde carreras cortas hasta maratones.",
            "precio": 125,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Azul",
@@ -79,7 +79,7 @@
          {
            "id": 5,
            "nombre": "Fresh Foam 1080 v13",
-           "descripcion": "---",
+           "descripcion": "Las Fresh Foam 1080 v13 de New Balance son ideales para corredores con pisada neutra que buscan comodidad y amortiguación en sus entrenamientos. Con un drop de 6 mm y un diseño elegante en color blanco, estas zapatillas son perfectas para distancias cortas, medias y maratones. Proporcionan una excelente absorción de impactos y un ajuste cómodo para todo tipo de corredores.",
            "precio": 1655,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Blanco",
@@ -97,7 +97,7 @@
          {
            "id": 6,
            "nombre": "Nimbus 25",
-           "descripcion": "---",
+           "descripcion": "Las Nimbus 25 de Asics están diseñadas para ofrecer la máxima comodidad y soporte a corredores con pisada neutra. Con un drop de 8 mm y un atractivo diseño en color azul, estas zapatillas son ideales para entrenamientos y carreras de corta, media y larga distancia. Su tecnología avanzada garantiza una experiencia de carrera suave y sin contratiempos.",
            "precio": 139,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Azul",
@@ -115,7 +115,7 @@
          {
            "id": 7,
            "nombre": "Ultraboost Light 23",
-           "descripcion": "---",
+           "descripcion": "Las Ultraboost Light 23 de Adidas son perfectas para corredores con pisada neutra o supinadora que buscan una zapatilla ligera y cómoda para sus entrenamientos. Con un drop de 10 mm y un diseño moderno en color blanco, estas zapatillas son ideales para cualquier distancia, desde cortas hasta maratones. Su amortiguación superior proporciona una carrera energizante y sin esfuerzo.",
            "precio": 125,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Blanco",
@@ -133,7 +133,7 @@
          {
            "id": 8,
            "nombre": "Vaporfly 3",
-           "descripcion": "---",
+           "descripcion": "Las Vaporfly 3 de Nike son las zapatillas de competición por excelencia para corredores de élite y aficionados que buscan mejorar sus tiempos. Con un drop de 8 mm y un diseño aerodinámico en blanco, estas zapatillas ofrecen una eficiencia energética superior y una amortiguación excepcional. Son ideales para maratones y carreras de media distancia.",
            "precio": 239,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Blanco",
@@ -151,7 +151,7 @@
         {
             "id": 9,
             "nombre": "Invincible 3",
-            "descripcion": "---",
+            "descripcion": "Las Invincible 3 de Nike están diseñadas para ofrecer una gran comodidad y soporte durante los entrenamientos. Con un drop de 9 mm y un diseño atractivo en color azul, estas zapatillas son perfectas para corredores con pisada neutra que buscan una opción versátil para distancias cortas, medias y maratones. Su amortiguación proporciona una excelente absorción de impactos.",
             "precio": 139,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -169,7 +169,7 @@
         {
             "id": 10,
             "nombre": "Bondi 8",
-            "descripcion": "---",
+            "descripcion": "Las Bondi 8 de Hoka son ideales para corredores con pisada neutra que buscan una zapatilla extremadamente cómoda y amortiguada para sus entrenamientos. Con un drop de 4 mm y un diseño robusto en color azul, estas zapatillas son perfectas para largas distancias. Su amortiguación superior garantiza una carrera suave y protegida.",
             "precio": 119,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -187,7 +187,7 @@
         {
             "id": 11,
             "nombre": "GT 1000 11",
-            "descripcion": "---",
+            "descripcion": "Las GT 1000 11 de Asics son perfectas para corredores con pisada pronadora que necesitan estabilidad y soporte durante sus entrenamientos. Con un drop de 8 mm y un diseño clásico en color negro, estas zapatillas son ideales para cualquier distancia, desde corta hasta maratón. Proporcionan una gran estabilidad y comodidad para una experiencia de carrera segura.",
             "precio": 75,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Negro",
@@ -205,7 +205,7 @@
         {
             "id": 12,
             "nombre": "Arahi 6",
-            "descripcion": "---",
+            "descripcion": "Las Arahi 6 de Hoka son ideales para corredores con pisada neutra o pronadora que buscan una zapatilla versátil para entrenamientos. Con un drop de 5 mm y un diseño llamativo en color azul, estas zapatillas son perfectas para distancias cortas, medias y maratones. Ofrecen una combinación de soporte y amortiguación para una carrera eficiente y cómoda.",
             "precio": 115,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -223,7 +223,7 @@
         {
             "id": 13,
             "nombre": "Fresh Foam X More v4",
-            "descripcion": "---",
+            "descripcion": "Las Fresh Foam X More v4 de New Balance son perfectas para corredores con pisada neutra que buscan una zapatilla extremadamente amortiguada para largas distancias. Con un drop de 4 mm y un diseño moderno en color blanco, estas zapatillas son ideales para entrenamientos exigentes. Proporcionan una gran absorción de impactos y una experiencia de carrera suave.",
             "precio": 139,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Blanco",
@@ -241,7 +241,7 @@
         {
             "id": 14,
             "nombre": "FuelCell Rebel v4",
-            "descripcion": "---",
+            "descripcion": "Las FuelCell Rebel v4 de New Balance son ideales para corredores con pisada neutra que buscan una zapatilla ligera y rápida para entrenamiento y competición. Con un drop de 6 mm y un diseño dinámico en color azul, estas zapatillas son perfectas para cualquier distancia. Ofrecen una excelente reactividad y amortiguación para mejorar el rendimiento.",
             "precio": 159,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -259,7 +259,7 @@
         {
            "id": 15,
            "nombre": "Endorphin Speed 3",
-           "descripcion": "---",
+           "descripcion": "Las Endorphin Speed 3 de Saucony son perfectas para corredores con pisada neutra que buscan una zapatilla versátil para entrenamiento y competición. Con un drop de 8 mm y un diseño elegante en color blanco, estas zapatillas son ideales para distancias cortas, medias y maratones. Proporcionan una gran reactividad y comodidad para una experiencia de carrera óptima.",
            "precio": 139,
            "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
            "color": "Blanco",
@@ -284,7 +284,7 @@
           {
             "id": 16,
             "nombre": "Fresh Foam X Hierro v7",
-            "descripcion": "---",
+            "descripcion": "Las Fresh Foam X Hierro v7 de New Balance son zapatillas de trail running diseñadas para ofrecer comodidad y rendimiento en terrenos irregulares. Con una pisada neutra a supinadora, un drop de 4 mm y disponibles en color marrón, son ideales para distancias cortas, medias, maratón e incluso ultras. Con un diseño resistente y duradero, son perfectas para entrenamientos en montaña.",
             "precio": 104,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Marron",
@@ -302,7 +302,7 @@
           {
             "id": 17,
             "nombre": "Pegasus Trail 4",
-            "descripcion": "---",
+            "descripcion": "Las Pegasus Trail 4 de Nike son zapatillas de trail running versátiles, ideales para corredores de pisada neutra. Con un drop de 10 mm y un diseño en color amarillo, son adecuadas para distancias que van desde cortas hasta medias maratones. Ofrecen una excelente tracción y estabilidad en terrenos difíciles, siendo una opción confiable para tus aventuras en la montaña.",
             "precio": 94,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Amarillo",
@@ -320,7 +320,7 @@
           {
             "id": 18,
             "nombre": "Speedgoat 5",
-            "descripcion": "---",
+            "descripcion": "Las Speedgoat 5 de Hoka son zapatillas de trail running diseñadas para ofrecer un rendimiento óptimo en terrenos técnicos. Con una pisada neutra, un drop de 5 mm y un llamativo color amarillo, son ideales para distancias de media maratón, maratón y ultra. Con una construcción robusta y una suela con agarre excepcional, te brindan la confianza necesaria para enfrentar cualquier desafío en la montaña.",
             "precio": 109,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Amarillo",
@@ -338,7 +338,7 @@
           {
             "id": 19,
             "nombre": "Terrex Agravic Flow 2.0",
-            "descripcion": "---",
+            "descripcion": "Las Terrex Agravic Flow 2.0 de Adidas son zapatillas de trail running diseñadas para ofrecer versatilidad y rendimiento en terrenos difíciles. Con una pisada neutra, un drop de 8 mm y un llamativo color rojo, son ideales para distancias que van desde cortas hasta maratones. Su diseño ligero y transpirable te permite moverte con agilidad en cualquier tipo de terreno, mientras que su suela Continental™ proporciona un agarre excepcional en condiciones adversas.",
             "precio": 109,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Rojo",
@@ -356,7 +356,7 @@
           {
             "id": 20,
             "nombre": "Gel Trabuco 12",
-            "descripcion": "---",
+            "descripcion": "Las Gel Trabuco 12 de Asics son zapatillas de trail running diseñadas para ofrecer estabilidad y protección en terrenos exigentes. Con una pisada neutra, un drop de 8 mm y un atractivo color azul, son ideales para distancias cortas, medias maratones y maratones. Su amortiguación GEL en el talón y la puntera proporciona una absorción de impactos superior, mientras que su suela AHAR+ garantiza una tracción duradera en cualquier tipo de terreno.",
             "precio": 109,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -374,7 +374,7 @@
           {
             "id": 21,
             "nombre": "Sense Ride 5",
-            "descripcion": "---",
+            "descripcion": "Las Sense Ride 5 de Salomon son zapatillas de trail running diseñadas para ofrecer comodidad y rendimiento en todo tipo de terrenos. Con una pisada neutra, un drop de 8 mm y un atractivo color naranja, son ideales para distancias que van desde cortas hasta maratones. Su diseño ligero y transpirable proporciona una sensación de libertad en cada paso, mientras que su suela Contagrip® ofrece una tracción excepcional en superficies resbaladizas.",
             "precio": 89,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Naranja",
@@ -392,7 +392,7 @@
           {
             "id": 22,
             "nombre": "Pegasus Trail 4 Gore-Tex",
-            "descripcion": "---",
+            "descripcion": "Las Pegasus Trail 4 Gore-Tex de Nike son zapatillas de trail running diseñadas para enfrentar los elementos con confianza. Con una pisada neutra, un drop de 10 mm y un elegante color blanco, son ideales para distancias que van desde cortas hasta maratones. Su membrana impermeable Gore-Tex te mantiene protegido en condiciones climáticas adversas, mientras que su suela con tracción mejorada garantiza una pisada segura en terrenos resbaladizos.",
             "precio": 124,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Blanco",
@@ -410,7 +410,7 @@
           {
             "id": 23,
             "nombre": "Cascadia 17",
-            "descripcion": "---",
+            "descripcion": "Las Cascadia 17 de Brooks son zapatillas de trail running diseñadas para ofrecer estabilidad y protección en terrenos técnicos. Con una pisada neutra, un drop de 8 mm y un llamativo color azul, son ideales para distancias que van desde medias maratones hasta ultras. Su amortiguación BioMoGo DNA proporciona una sensación de comodidad durante todo el recorrido, mientras que su diseño resistente y duradero te permite enfrentar cualquier desafío en la montaña.",
             "precio": 109,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -428,7 +428,7 @@
           {
             "id": 24,
             "nombre": "Nitrel v5",
-            "descripcion": "---",
+            "descripcion": "Las Nitrel v5 de New Balance son zapatillas de trail running versátiles, ideales para corredores de pisada neutra. Con un drop de 8 mm y un atractivo color beige, son ideales para distancias que van desde cortas hasta maratones. Su diseño ligero y transpirable te permite moverte con agilidad en cualquier tipo de terreno, mientras que su suela AT Tread proporciona una tracción óptima en superficies variadas.",
             "precio": 69,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Beige",
@@ -446,7 +446,7 @@
           {
             "id": 25,
             "nombre": "Caldera 6",
-            "descripcion": "---",
+            "descripcion": "Las Caldera 6 de Brooks son zapatillas de trail running diseñadas para ofrecer una mezcla perfecta de amortiguación y respuesta en terrenos exigentes. Con una pisada neutra, un drop de 6 mm y un llamativo color amarillo, son ideales para distancias que van desde medias maratones hasta ultras. Su amortiguación reactiva y su suela adherente te brindan la confianza necesaria para enfrentar cualquier desafío en la montaña.",
             "precio": 104,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Amarillo",
@@ -464,7 +464,7 @@
           {
             "id": 26,
             "nombre": "Challenger 7",
-            "descripcion": "---",
+            "descripcion": "Las Challenger 7 de Hoka son zapatillas de trail running diseñadas para ofrecer estabilidad y tracción en terrenos técnicos. Con una pisada neutra, un drop de 5 mm y un atractivo color azul, son ideales para distancias que van desde cortas hasta maratones. Su entresuela de EVA proporciona una amortiguación ligera y receptiva, mientras que su suela de goma Vibram te ofrece un agarre excepcional en cualquier tipo de terreno.",
             "precio": 119,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -482,7 +482,7 @@
           {
             "id": 27,
             "nombre": "Agility Peak 5",
-            "descripcion": "---",
+            "descripcion": "Las Agility Peak 5 de Merrell son zapatillas de trail running diseñadas para ofrecer estabilidad y tracción en terrenos difíciles. Con una pisada neutra, un drop de 6 mm y un llamativo color azul, son ideales para distancias que van desde cortas hasta maratones. Su diseño ligero y transpirable te permite moverte con agilidad en cualquier tipo de terreno, mientras que su suela M Select™ GRIP proporciona una tracción superior en condiciones adversas.",
             "precio": 114,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -500,7 +500,7 @@
           {
             "id": 28,
             "nombre": "Peregrine 13",
-            "descripcion": "---",
+            "descripcion": "Las Peregrine 13 de Saucony son zapatillas de trail running versátiles, ideales para corredores que buscan velocidad y agilidad en terrenos técnicos. Con una pisada neutra, un drop de 4 mm y un atractivo color azul, son ideales para distancias que van desde cortas hasta ultras. Su entresuela PWRRUN ofrece una amortiguación receptiva y una sensación de velocidad, mientras que su suela PWRTRAC proporciona una tracción excepcional en superficies resbaladizas.",
             "precio": 99,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Azul",
@@ -518,7 +518,7 @@
           {
             "id": 29,
             "nombre": "Tomir 2.0",
-            "descripcion": "---",
+            "descripcion": "Las Tomir 2.0 de NNormal son zapatillas de trail running diseñadas para ofrecer rendimiento y estilo en cada carrera. Con una pisada neutra, un drop de 8 mm y un elegante color blanco, son ideales para distancias que van desde cortas hasta maratones. Su diseño ligero y transpirable te mantiene cómodo en todo momento, mientras que su entresuela de EVA te proporciona una amortiguación suave y receptiva en cada paso.",
             "precio": 160,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Blanco",
@@ -536,7 +536,7 @@
           {
             "id": 30,
             "nombre": "Ultra Glide 2",
-            "descripcion": "---",
+            "descripcion": "Las Ultra Glide 2 de Salomon son zapatillas de trail running diseñadas para ofrecer comodidad y rendimiento en terrenos variados. Con una pisada neutra, un drop de 6 mm y un elegante color blanco, son ideales para distancias que van desde medias maratones hasta ultras. Su diseño ligero y transpirable te permite moverte con agilidad en cualquier tipo de terreno, mientras que su suela Contagrip® te ofrece una tracción excepcional en superficies resbaladizas.",
             "precio": 99,
             "talla": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
             "color": "Blanco",
