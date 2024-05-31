@@ -3,12 +3,14 @@ package com.edix.restful.zaps.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.edix.restful.zaps.modelo.entities.Producto;
+import com.edix.restful.zaps.modelo.entities.Producto.Talla;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
@@ -31,7 +33,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     List<Producto> buscarProductosFiltrados (@Param("nombre") String nombre,
                                              @Param("precioMin") BigDecimal precioMin,
                                              @Param("precioMax") BigDecimal precioMax,
-                                             @Param("talla") double talla,
+                                             @Param("talla") Talla talla,
                                              @Param("color") String color,
                                              @Param("tipoPisada") Producto.TipoPisada tipoPisada,
                                              @Param("tipoSuperficie") Producto.TipoSuperficie tipoSuperficie,
@@ -42,4 +44,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
                                              @Param("uso") Producto.Uso uso,
                                              @Param("año") int año,
                                              @Param("disponible") boolean disponible);
+
+	List<Producto> findAll(Specification<Producto> specification);
 }

@@ -14,11 +14,11 @@ public interface CarritoService {
     Carrito buscarCarritoPorId(int idCarrito);
     List<Carrito> buscarTodosCarritos();
     boolean modificarCarrito(Carrito carrito);
-    boolean crearCarrito(int idUsuario);
+    boolean crearCarrito(Carrito carrito);
     boolean eliminarCarrito(int idCarrito);
     //boolean agregarProductoAlCarrito(int idCarrito, Producto producto, int cantidad);
-    boolean eliminarProductoDelCarrito(int idCarrito, Producto producto);
+    boolean eliminarProductoDelCarrito(int idCarrito, int idProducto, int cantidad);
     BigDecimal calcularTotalCarrito(int idCarrito);
 	boolean agregarProductoAlCarrito (int idCarrito, int idProducto, int cantidad);
-
+	Carrito buscarCarritoPorIdUsuario (int idUsuario);
 }

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.edix.restful.zaps.Auth.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,9 +59,10 @@ public class Usuario implements Serializable, UserDetails {
 	private String email;
 	private String direccion;
 	private String telefono;
-	private boolean verificado;
-	private boolean enabled;
+	
+	private boolean enabled; 
 	@Enumerated(EnumType.STRING)
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	Role role;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -83,9 +85,9 @@ public class Usuario implements Serializable, UserDetails {
     @JsonIgnore
     private List<Pedido> pedido;
 
-    @OneToMany(mappedBy="usuario")
+    @OneToOne(mappedBy="usuario")
     @JsonIgnore
-    private List<ListaDeseo> listaDeseo;
+    private ListaDeseo listaDeseo;
     
 	//uni-directional many-to-many association to Perfil
 	@ManyToMany
@@ -122,6 +124,23 @@ public class Usuario implements Serializable, UserDetails {
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Usuario{" +
+	            "idUsuario=" + idUsuario +
+	            ", username='" + username + '\'' +
+	            ", password='" + password + '\'' +
+	            ", nombre='" + nombre + '\'' +
+	            ", email='" + email + '\'' +
+	            ", direccion='" + direccion + '\'' +
+	            ", telefono='" + telefono + '\'' +
+	            ", enabled=" + enabled +
+	            ", role=" + role +
+	            ", fechaRegistro=" + fechaRegistro +
+	            ", ultimaConexion=" + ultimaConexion +
+	            '}';
 	}
 
 

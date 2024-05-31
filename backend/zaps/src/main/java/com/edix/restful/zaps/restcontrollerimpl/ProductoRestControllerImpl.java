@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.edix.restful.zaps.modelo.dto.ProductoDTO;
+import com.edix.restful.zaps.modelo.dto.ProductoFilterDTO;
 import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.restcontroller.ProductoController;
 import com.edix.restful.zaps.service.ProductoService;
@@ -38,7 +40,7 @@ public class ProductoRestControllerImpl implements ProductoController {
     private ModelMapper modelMapper;
 
     @Override
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Producto>> verTodosProductos() {
         List<Producto> productos = productoService.buscarTodosProductos();
         return ResponseEntity.ok().body(productos);      
@@ -56,7 +58,7 @@ public class ProductoRestControllerImpl implements ProductoController {
     }
     
     @Override
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Producto> altaProducto(@RequestBody ProductoDTO productoDto) {
         Producto producto = modelMapper.map(productoDto, Producto.class);
         Producto productoDadoAlta = productoService.altaProducto(producto);
@@ -95,5 +97,13 @@ public class ProductoRestControllerImpl implements ProductoController {
         logger.info("Saliendo del método readAll con {} usuarios", productosPage.getTotalElements());
         return productosPage;
 	}
+    
+    @GetMapping("/recomendador")
+    public ResponseEntity<List<Producto>> recomendador(@ModelAttribute ProductoFilterDTO filtro) {
+
+    	List<Producto> productosRec = productoService.buscarProductosRecomendador(filtro);
+    	return ResponseEntity.ok(productosRec);
+    }
+    
 }
 

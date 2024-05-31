@@ -1,15 +1,19 @@
 package com.edix.restful.zaps.serviceImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.edix.restful.zaps.modelo.dto.ProductoFilterDTO;
 import com.edix.restful.zaps.modelo.entities.Producto;
 import com.edix.restful.zaps.modelo.entities.Producto.Genero;
+import com.edix.restful.zaps.modelo.entities.Producto.Talla;
 import com.edix.restful.zaps.modelo.entities.Producto.TipoDistancia;
 import com.edix.restful.zaps.modelo.entities.Producto.TipoPisada;
 import com.edix.restful.zaps.modelo.entities.Producto.TipoSuperficie;
@@ -73,7 +77,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Producto> buscarPorFiltros(String nombre, BigDecimal precioMin, BigDecimal precioMax, double talla,
+	public List<Producto> buscarPorFiltros(String nombre, BigDecimal precioMin, BigDecimal precioMax, Talla talla,
 			String color, TipoPisada tipoPisada, TipoSuperficie tipoSuperficie, TipoDistancia tipoDistancia,
 			int tipoDrop, Genero genero, String marca, Uso uso, int año, boolean disponible) {
 		try {
@@ -101,5 +105,13 @@ public class ProductoServiceImpl implements ProductoService {
 	@Transactional(readOnly=true)
 	public Page<Producto> findAll(Pageable pageable) {		
 		return productoRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Producto> buscarProductosRecomendador(ProductoFilterDTO filtro) {
+		Specification<Producto> specification = filtro.obtainFilterSpecification();
+		List<Producto> productosFiltrados = productoRepository.findAll(specification);
+		
+		return productosFiltrados;
 	}
 	}

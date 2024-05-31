@@ -47,7 +47,10 @@ public class Producto implements Serializable {
 	private String nombre;
 	private String descripcion;
 	private BigDecimal precio;
-	private double talla;
+	
+	@Enumerated(EnumType.STRING)
+	private Talla talla;
+	
 	private String color;
 	
 	@Enumerated(EnumType.STRING)
@@ -123,7 +126,7 @@ public class Producto implements Serializable {
 	//private Carrito carrito;
 	
 	@OneToMany(mappedBy = "producto")
-	@JsonIgnoreProperties("producto")
+	@JsonIgnore
     private List<DetallePedido> detallePedido;
     
     @OneToMany(mappedBy = "producto")
@@ -161,6 +164,17 @@ public class Producto implements Serializable {
         competicion,
         mixta
     }
+    
+    public enum Talla {
+        T38,
+        T39,
+        T40,
+        T41,
+        T42,
+        T43,
+        T44
+    }
+
     
     public BigDecimal getPrecio() {
         return this.precio != null ? this.precio : BigDecimal.ZERO;
