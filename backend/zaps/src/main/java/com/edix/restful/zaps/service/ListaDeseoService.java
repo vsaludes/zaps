@@ -19,7 +19,9 @@ public interface ListaDeseoService {
 	    boolean crearListaDeseo(ListaDeseo listaDeseo);
 
 		boolean notificacionProducto(int idListaDeseo, int idProducto, boolean notificar);
-	}
+	
+		boolean guardarListaDeseo(ListaDeseo listaDeseo);
+}
 	
 	
 	

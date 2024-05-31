@@ -75,8 +75,18 @@ public class ListaDeseoServiceImpl implements ListaDeseoService {
         }
         return false;
     }
-}
 
+    @Override
+    public boolean guardarListaDeseo(ListaDeseo listaDeseo) {
+        try {
+            listaDeseoRepository.save(listaDeseo);
+            return true; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; 
+        }
+    }
+}
 /*
 @Override
 public ListaDeseo buscarListaDeseoPorId(int idListaDeseo) {

@@ -3,7 +3,7 @@ package com.edix.restful.zaps.restcontroller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.edix.restful.zaps.modelo.entities.Producto;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface UsuarioController {
 
-    ResponseEntity<Usuario> buscarUsuarioPorId(int id);
+    ResponseEntity<Usuario> buscarUsuarioPorId(int idUsuario);
 
     ResponseEntity<Usuario> buscarUsuarioPorNombre(String username);
 
@@ -23,17 +23,22 @@ public interface UsuarioController {
 
     ResponseEntity<List<Usuario>> buscarTodosUsuarios();
 
-    ResponseEntity<Void> modificarUsuario(@Validated @RequestBody Usuario usuario);
+    ResponseEntity<Usuario> modificarUsuario(@RequestBody Usuario usuario);
 
-    ResponseEntity<Void> agregarAListaDeseos(int id, @RequestBody Producto producto);
+    ResponseEntity<Void> agregarAListaDeseos(int idUsuario, @RequestBody Producto producto);
 
-    ResponseEntity<Void> eliminarDeListaDeseos(int id, @RequestBody Producto producto);
+    ResponseEntity<Void> eliminarDeListaDeseos(int idUsuario, @RequestBody Producto producto);
 
-    ResponseEntity<Void> agregarValoracionAUsuario(int id, @RequestBody Valoracion valoracion);
+    ResponseEntity<Void> agregarValoracionAUsuario(int idUsuario, @RequestBody Valoracion valoracion);
 
-    ResponseEntity<Void> eliminarValoracionDeUsuario(int id, @RequestBody Valoracion valoracion);
+    ResponseEntity<Void> eliminarValoracionDeUsuario(int idUsuario, @RequestBody Valoracion valoracion);
 
-    ResponseEntity<Void> enviarNotificacionProducto(int id, @RequestBody Producto producto);
+    ResponseEntity<Void> enviarNotificacionProducto(int idUsuario, @RequestBody Producto producto);
 
     ResponseEntity<Usuario> getCurrentUser(Principal principal);
+    
+    ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario);
+
+    ResponseEntity<String> eliminarUsuario(@PathVariable int idUsuario);
+    
 }

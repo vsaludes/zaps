@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -46,4 +48,11 @@ public class DetallePedido implements Serializable {
 	private int cantidad;
 	private BigDecimal subtotal;
 	
+	/*
+	private String nombreProducto;
+	private String colorProducto;
+	@Enumerated(EnumType.STRING)
+	private Producto.Talla tallaProducto;
+	private BigDecimal precioProducto;
+	*/
 }

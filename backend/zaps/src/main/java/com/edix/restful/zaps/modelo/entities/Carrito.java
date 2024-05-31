@@ -32,7 +32,6 @@ import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="Carrito")
 @NamedQuery(name="Carrito.findAll", query="SELECT c FROM Carrito c")
@@ -73,9 +72,12 @@ public class Carrito implements Serializable {
     private List<CarritoProducto> carritoProducto;
 
     
-    @Temporal(TemporalType.TIMESTAMP)
-	private Date fecha;
+    //@Temporal(TemporalType.TIMESTAMP)
+	//private Date fecha;
     
+    public Carrito() {
+        this.carritoProducto = new ArrayList<>();
+    }
    
     public List<Producto> getProductos() {
         List<Producto> productos = new ArrayList<>();
@@ -119,6 +121,13 @@ public class Carrito implements Serializable {
         carritoProducto.add(nuevoCarritoProducto);
     }
 
-  
+    @Override
+    public String toString() {
+        return "Carrito{" +
+                "idCarrito=" + idCarrito +
+                ", usuario=" + (usuario != null ? usuario.getUsername() : "null") +
+                '}';
+    }
+
 
 }

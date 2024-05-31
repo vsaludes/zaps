@@ -82,9 +82,8 @@ public class PedidoServiceImpl implements PedidoService {
             return false;
         }
     }
-
 	@Override
-	@Transactional
+	//@Transactional
 	public boolean cancelarPedido(int idPedido) {
 	    try {
 	        Pedido pedido = buscarPedidoPorId(idPedido);
@@ -100,7 +99,7 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	//@Transactional(readOnly=true)
 	public boolean marcarPedidoEntregado(int idPedido) {
 	    try {
 	        Pedido pedido = buscarPedidoPorId(idPedido);
@@ -126,7 +125,7 @@ public class PedidoServiceImpl implements PedidoService {
 	    }
 }
 	@Override
-	@Transactional
+	//@Transactional
 	public boolean eliminarPedidoPorId(int idPedido) {
 	    try {
 	        Pedido pedido = buscarPedidoPorId(idPedido);

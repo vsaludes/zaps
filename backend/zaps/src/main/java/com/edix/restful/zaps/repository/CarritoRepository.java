@@ -11,4 +11,5 @@ public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
 	
 	@Query("SELECT c FROM Carrito c WHERE c.usuario.idUsuario = :idUsuario")
 	Carrito findByUsuarioId(int idUsuario);
+	
 }

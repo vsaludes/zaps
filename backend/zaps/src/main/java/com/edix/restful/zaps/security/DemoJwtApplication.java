@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.edix.restful.zaps", "com.edix.restful.zapsJwt"})
+@ComponentScan(basePackages = {"com.edix.restful.zaps"})
 public class DemoJwtApplication {
 
 	public static void main(String[] args) {
